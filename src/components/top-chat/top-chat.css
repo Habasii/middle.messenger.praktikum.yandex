@@ -1,0 +1,46 @@
+.top-chat-box {
+  display: flex;
+  height: 100%;
+}
+
+.avatar, .user-chat-info, .buttons {
+  display: inline-block;
+  margin: auto;
+  text-align: center;
+  font-size: 24pt;
+}
+
+.avatar {
+  margin: 4px;
+  color: var(--main-color);
+}
+
+.avatar img {
+  margin: calc(100% - 72px);
+}
+
+.avatar, .user-chat-info, .fa {
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.avatar, .user-chat-info, .fa:hover {
+  color: var(--main-color-2);
+}
+
+.user-chat-info .input__element {
+  height: 60%;
+  color: var(--main-color);
+}
+
+.top-chat-box > .avatar {
+  width: 80px;
+}
+
+.top-chat-box > .buttons {
+  width: 50px;
+}
+
+.top-chat-box > .user-chat-info {
+  width: calc(100% - 80px - 50px);
+}

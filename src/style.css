@@ -1,8 +1,10 @@
 :root {
-    --main-color: #3369f3;
+    --main-color: #d4ae82;
+    --main-color-2: #252525b7;
+    --main-color-3: #3a3a3abd;
     --second-color: #e4edfd;
     --error-color: #ff2f2f;
-    --text-color: #1e1e1e;
+    --text-color: #000000;
     --text-secondary-color: #999;
   }
 
@@ -22,7 +24,8 @@ body {
 .container {
   display: flex;
   justify-content: center;
-  background: #00000079;
+  background: #00000096;
+  border: 2px solid black;
   width: max-content;
   border-radius: 18px;
   margin-left: auto;

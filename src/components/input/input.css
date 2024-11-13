@@ -28,6 +28,7 @@
     font-weight: 500;
     color: var(--text-color);
     padding-bottom: 7px;
+    background-color: rgba(0,0,0,0);
   }
   
   .input__element:focus-visible {

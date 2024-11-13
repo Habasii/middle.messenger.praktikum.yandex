@@ -1,0 +1,32 @@
+.message-box {
+  display: flex;
+}
+
+.includes, .message-input, .message-enter {
+  display: inline-block;
+  margin: auto;
+  text-align: center;
+  font-size: 24pt;
+}
+
+.includes, .message-input, .fa {
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.includes, .message-input, .fa:hover {
+  color: var(--main-color);
+}
+
+.includes, .message-input .input__element {
+  height: 60%;
+  color: var(--main-color);
+}
+
+.message-box > .includes, .message-box > .message-enter {
+  width: 50px;
+}
+
+.message-box > .message-input {
+  width: calc(100% - 100px);
+}

@@ -8,6 +8,7 @@ import cat3 from './assets/03.jpg'
 
 const pages = {
   'login': [ Pages.LoginPage ],
+  'auth': [ Pages.AuthPage ],
   'list': [ Pages.ListPage, {
     cats: [
       {name: 'cat-1', avatar: cat1},
@@ -29,7 +30,7 @@ function navigate(page: string) {
   const container = document.getElementById('app')!;
 
   const temlpatingFunction = Handlebars.compile(source);
-  console.log('html', temlpatingFunction(context))
+  // console.log('html', temlpatingFunction(context))
   container.innerHTML = temlpatingFunction(context);
 }
 

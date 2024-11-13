@@ -1,9 +1,28 @@
 <div>
-    {{> Button label="go to home" type="link" }}
-    {{> ListCat cats=cats }}
+    <!--{{> Button label="go to home" type="link" }}
+    {{> ListCat cats=cats }}-->
 
-    {{#if showDialog}}
+    <div class="container">
+        <div class="list-left-block">
+            <div class="list-search">{{> ListSearch }}</div>
+            <div class="list-contacts-container">{{> ListCat cats=cats }}</div>
+        <div class=""></div>
+        </div>
+        <div class="list-right-block">
+            <div class="selected-user-top-info">
+                {{#each cats}}
+                    {{#if active}}
+                        {{> TopChat }}
+                    {{/if}}
+                {{/each}}
+            </div>
+            <div class="chat"></div>
+            <div class="message">{{> MessageBox }}</div>
+        </div>
+    </div>
+
+    <!--{{#if showDialog}}
         {{> RemoveCatDialog }}
-    {{/if}}
+    {{/if}}-->
 
 </div>

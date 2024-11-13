@@ -1,0 +1,53 @@
+.list-left-block {
+    width: 300px;
+    height: 80vh;
+    box-sizing: border-box;
+}
+
+.list-right-block {
+    width: calc(80vw - 300px);
+    box-sizing: border-box;
+}
+
+.list-search {
+    height: 100px;
+    box-sizing: border-box;
+    margin: 16px;
+}
+
+.list-contacts-container {
+    box-sizing: border-box;
+    background-color: var(--main-color-2);
+    border: 2px solid black;
+    margin: 16px;
+    padding: 16px;
+    border-radius: 12px;
+    height: calc(100% - 100px - 16px * 3);
+}
+
+.selected-user-top-info {
+    height: 100px;
+    box-sizing: border-box;
+    background-color: var(--main-color);
+    border: 2px solid black;
+    margin: 16px 16px 16px 0px;
+    border-radius: 12px;
+}
+
+.chat {
+    height: calc(100% - 100px - 60px - 16px * 4);
+    box-sizing: border-box;
+    margin: 0px 16px 16px 0px;
+    background-color: var(--main-color-3);
+    border: 2px solid black;
+    border-radius: 12px;
+}
+
+.message {
+    height: 60px;
+    box-sizing: border-box;
+    margin: 0px 16px 16px 0px;
+    background-color: var(--main-color-2);
+    border: 2px solid black;
+    border-radius: 12px;
+}
