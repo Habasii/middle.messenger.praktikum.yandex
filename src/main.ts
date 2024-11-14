@@ -9,6 +9,7 @@ import cat3 from './assets/03.jpg'
 const pages = {
   'login': [ Pages.LoginPage ],
   'auth': [ Pages.AuthPage ],
+  'profile': [ Pages.ProfilePage, { disabled: true } ],
   'error-404': [ Pages.ErrorPage, { code: '404', comment: 'Страница не найдена.' } ],
   'error-500': [ Pages.ErrorPage, { code: '500', comment: 'Внутренняя ошибка сервера.' } ],
   'list': [ Pages.ListPage, {

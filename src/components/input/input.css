@@ -56,4 +56,9 @@
   .input__error .input__element {
     color: var(--error-color);
   }
+
+  [disabled] {
+    /* color:aqua;
+    background-color: blueviolet; */
+  }
   
