@@ -46,6 +46,14 @@
   color: var(--main-color-2);
 }
 
+.user-chat-info {
+  margin: 8px;
+  padding: 4px 8px;
+  text-align: left;
+  font-size: 18pt;
+  color: var(--text-color);
+}
+
 .user-chat-info .input__element {
   height: 60%;
   color: var(--main-color);
