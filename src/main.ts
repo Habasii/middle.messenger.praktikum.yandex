@@ -11,7 +11,8 @@ const pages = {
   'auth': [ Pages.AuthPage ],
   'profile': [ Pages.ProfilePage, { readonly: true } ],
   'profile-edit': [ Pages.ProfilePage ],
-  'profile-edit-password': [ Pages.ProfilePage, { readonly: true, editProfileDialog: true } ],
+  'profile-edit-password': [ Pages.ProfilePage, { readonly: true, editPasswrdDialog: true } ],
+  'profile-edit-avatar': [ Pages.ProfilePage, { readonly: true, editAvatarDialog: true } ],
   'error-404': [ Pages.ErrorPage, { code: '404', comment: 'Страница не найдена.' } ],
   'error-500': [ Pages.ErrorPage, { code: '500', comment: 'Внутренняя ошибка сервера.' } ],
   'list': [ Pages.ListPage, {

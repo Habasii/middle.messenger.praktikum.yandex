@@ -4,6 +4,7 @@
         <div class="list-contacts-container">
             <div class="avatar-container">
                 <img class="profile-avatar">
+                {{> ButtonLink label="Изменить аватар" href="#" page="profile-edit-avatar" type="link" }}
             </div>
             <div class="lofin-info-container">
                 {{> Input label="Логин" name="login" disabled=readonly }}
@@ -39,6 +40,10 @@
     </div>
 </div>
 
-{{#if editProfileDialog}}
+{{#if editPasswrdDialog}}
     {{> EditPasswordModal }}
+{{/if}}
+
+{{#if editAvatarDialog}}
+    {{> EditAvatarModal }}
 {{/if}}

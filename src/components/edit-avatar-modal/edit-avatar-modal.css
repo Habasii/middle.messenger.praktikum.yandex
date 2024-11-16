@@ -1,0 +1,8 @@
+.input__element-img {
+    height: 100px;
+    width: 100%;
+    background-color: var(--main-color-3);
+    border: 2px solid black;
+    text-align: center;
+    padding-top: calc(50% - 90px);
+}
