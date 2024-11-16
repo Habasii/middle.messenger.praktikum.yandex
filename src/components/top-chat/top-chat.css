@@ -1,4 +1,22 @@
-.top-chat-box {
+.selected-user-top-info {
+  height: 100px;
+  box-sizing: border-box;
+  background-color: var(--main-color);
+  border: 2px solid black;
+  margin: 16px 16px 16px 0px;
+  border-radius: 12px;
+}
+
+.profile-top-info {
+  height: 100px;
+  box-sizing: border-box;
+  background-color: transparent;
+  border: 2px solid transparent;
+  margin: 16px 16px 16px 0px;
+  border-radius: 12px;
+}
+
+.top-chat-box, .top-profile-box {
   display: flex;
   height: 100%;
 }
@@ -43,4 +61,8 @@
 
 .top-chat-box > .user-chat-info {
   width: calc(100% - 80px - 50px);
+}
+
+.user-profile-top {
+  color: var(--main-color);
 }

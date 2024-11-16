@@ -1,6 +1,14 @@
 <div class="list-search-box">
     <div class="list-search-button-container">
-        {{> ButtonLink id="button-profile" type="primary" label="Профиль" icon_left="fa-cog" href="#" page="profile" }}
+        {{#if profile}}
+            {{> ButtonLink id="button-profile" type="primary" label="Назад к чатам" icon_left="fa-cog" href="#" page="list" }}
+        {{else}}
+            {{> ButtonLink id="button-list-search" type="primary" label="Профиль" icon_left="fa-cog" href="#" page="profile" }}
+        {{/if}}
         </div>
-    <div class="list-search-input">{{> Input name="chat-search" label="Поиск" }}</div>
+    {{#if profile}}
+
+    {{else}}
+        <div class="list-search-input">{{> Input name="chat-search" label="Поиск" }}</div>
+    {{/if}}
 </div>

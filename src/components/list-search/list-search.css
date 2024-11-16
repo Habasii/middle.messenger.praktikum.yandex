@@ -13,8 +13,7 @@
   bottom: 0;
 }
 
-/* стиль кнопки на основе кнопок из Twitter Bootstrap */
-#button-profile {
+#button-list-search {
   display: block;
   color: var(--text-color);
   position: relative;
@@ -22,7 +21,7 @@
   position: absolute;
   right: 20px;
 }
-#button-profile:after{
+#button-list-search:after{
 	left: 100%;
 	top: 50%;
 	border: solid transparent;
@@ -35,4 +34,28 @@
 	border-width: 20px;
   margin-top: -20px;
   margin-left: -5px;
+}
+
+#button-profile {
+  display: block;
+  color: var(--text-color);
+  position: relative;
+  width: 150px;
+  position: absolute;
+  right: 5px;
+}
+
+#button-profile:before{
+	left: -35px;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	border-color: rgba(0, 0, 0, 0);
+	border-right-color: var(--main-color);
+	border-width: 20px;
+  margin-top: -20px;
+  margin-right: -5px;
 }

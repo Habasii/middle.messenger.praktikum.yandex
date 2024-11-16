@@ -5,7 +5,7 @@
             {{> @partial-block }}
         </div>
         <div class="dialog__footer">
-            {{> Button label=labelOk type="primary" }}
+            {{> ButtonLink label=labelOk type="primary" href=hrefOk page=linkOk }}
             {{#if labelCancel}}
                 {{> Button label=labelCancel type="link" }}
             {{/if}}

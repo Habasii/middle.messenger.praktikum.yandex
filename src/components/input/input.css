@@ -57,8 +57,7 @@
     color: var(--error-color);
   }
 
-  [disabled] {
-    /* color:aqua;
-    background-color: blueviolet; */
+  .input__element[disabled] {
+    border-bottom: 1px solid var(--main-color-2);
   }
   

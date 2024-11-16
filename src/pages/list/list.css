@@ -25,15 +25,6 @@
     height: calc(100% - 100px - 16px * 3);
 }
 
-.selected-user-top-info {
-    height: 100px;
-    box-sizing: border-box;
-    background-color: var(--main-color);
-    border: 2px solid black;
-    margin: 16px 16px 16px 0px;
-    border-radius: 12px;
-}
-
 .chat {
     height: calc(100% - 100px - 60px - 16px * 4);
     box-sizing: border-box;
