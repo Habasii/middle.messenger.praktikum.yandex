@@ -10,7 +10,7 @@
 .dialog {
     background-color: var(--main-color-2-no-transporent);
     border: 2px solid black;
-    border-radius: 12px ;
+    border-radius: 12px;
     position: fixed;
     left: 50%;
     top: 50%;
