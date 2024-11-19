@@ -17,5 +17,9 @@
   "dependencies": {
     "lodash-es": "^4.17.21",
     "vite-plugin-handlebars": "^2.0.0"
+  },
+  "engines" : { 
+    "npm" : "^9.0.0",
+    "node" : "^14.18.0"
   }
 }
