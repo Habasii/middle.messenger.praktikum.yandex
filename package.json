@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 3000",
     "build": "tsc -noEmmit && vite build",
     "preview": "npm run start",
-    "serve": "vite preview --port 3000"
+    "serve": "vite preview"
   },
   "devDependencies": {
     "handlebars": "4.7.8",
