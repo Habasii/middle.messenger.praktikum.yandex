@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -noEmmit && vite build",
-    "preview": "vite preview",
+    "preview": "npm run start",
     "serve": "vite preview --port 3000"
   },
   "devDependencies": {
