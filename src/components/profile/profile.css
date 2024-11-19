@@ -1,0 +1,60 @@
+.profile .profile-info {
+    height: calc(100% - 100px - 16px * 3);
+    box-sizing: border-box;
+    margin: 0px 16px 16px 0px;
+    background-color: var(--main-color-3);
+    border: 2px solid black;
+    border-radius: 12px;
+    position: relative;
+}
+
+.lofin-info-container {
+    height: 200px;
+}
+
+.profile-info-data {
+    width: 100%;
+}
+
+.profile .user-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 50px 30px 30px;
+    box-sizing: border-box;
+}
+
+.profile-actions-2 {
+    margin: 24px;
+    position: absolute;
+    right: 0;
+    bottom: 20;
+    width: 200px;
+}
+
+.avatar-container {
+    height: calc(100% - 38px - 200px);
+    text-align: center;
+    position: relative;
+}
+
+.profile-avatar {
+    margin: auto;
+    height: 200px;
+    width: 200px;
+    background-color: var(--main-color);
+    border-radius: 50%;
+    border: 2px solid black;
+    top: 80px;
+    position: relative;
+}
+
+.avatar-container:hover .profile-avatar {
+    background-color: var(--main-color--text-secondary-color);
+}
+
+.avatar-container:hover a {
+    top: 50%;
+    position: absolute;
+    cursor: pointer;
+}

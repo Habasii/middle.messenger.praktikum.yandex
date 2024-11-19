@@ -1,0 +1,85 @@
+.card {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    padding: 12px 10px;
+    position: relative;
+    margin: 2px 0;
+    height: 70px;
+}
+
+.card_active {
+    background-color: var(--main-color);
+    border: 2px solid black;
+    border-radius: 18px;
+}
+
+.card-date {
+    top: 0;
+    right: 0;
+    color: var(--main-color);
+    font-size: 8pt;
+}
+
+.card_active .card-date {
+    color: var(--main-color-2);
+}
+
+.card-name {
+    top: 0;
+    color: var(--text-secondary-color);
+    font-size: 10pt;
+    margin-top: 0;
+    margin-left: 4px;
+    font-weight: bold;
+}
+
+.card_active .card-name {
+    color: var(--main-color-2);
+}
+
+.card-mess {
+    color: var(--text-secondary-color);
+    font-size: 10pt;
+    margin-top: 0;
+    margin-left: 4px;
+}
+
+.card_active .card-mess {
+    color: var(--main-color-2);
+}
+
+.list-avatar-container {
+    width: 70px;
+}
+
+.list-avatar-container>img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 2px solid black;
+}
+
+.list-contact-container {
+    width: 100%;
+    margin: 0px 10px 0px 80px;
+    position: absolute;
+
+}
+
+.card-indicator {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 8px;
+    padding: 2px;
+    text-align: center;
+    background-color: var(--main-color);
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 10pt;
+    font-weight: bold;
+    line-height: 14pt;
+    color: var(--second-color);
+}
