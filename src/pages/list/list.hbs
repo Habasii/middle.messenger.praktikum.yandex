@@ -1,4 +1,4 @@
-<div>
+<main>
     <div class="container">
         <div class="list-left-block">
             <div class="list-search">{{> ListSearch }}</div>
@@ -7,7 +7,7 @@
         </div>
         <div class="list-right-block">
             {{#each cats}}
-                {{#if active}}
+                    {{#if active}}
                     {{> TopChat }}
                 {{/if}}
             {{/each}}
@@ -15,4 +15,4 @@
             <div class="message">{{> MessageBox }}</div>
         </div>
     </div>
-</div>
+</main>
