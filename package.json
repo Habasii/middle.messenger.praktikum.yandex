@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "vite --port 3000",
     "build": "npx tsc -noEmit && vite build",
-    "preview": "npm run start",
-    "serve": "vite preview"
+    "preview": "vite --port 3000",
+    "serve": "vite preview",
+    "start": "npm run preview"
   },
   "devDependencies": {
     "handlebars": "4.7.8",
