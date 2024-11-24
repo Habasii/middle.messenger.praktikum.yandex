@@ -5,6 +5,11 @@ export default class Button extends Block {
     super("button", {
       ...props,
       className: `button button__${props.color}`,
+      attrs: {
+        href: props.href,
+        page: props.page,
+        id: props.id,
+      },
       events: {
         click: props.onClick,
       },
@@ -12,15 +17,13 @@ export default class Button extends Block {
   }
   public render(): string {
     return `
-      <button class="button button__{{color}}" id="{{ id }}">
-          {{#if icon_left}}
-              <i class="fa {{ icon_left }}"></i>
-          {{/if}}
-              {{ label }}
-          {{#if icon_right}}
-              <i class="fa {{ icon_right }}"></i>
-          {{/if}}
-      </button>
+      {{#if icon_left}}
+          <i class="fa {{ icon_left }}"></i>
+      {{/if}}
+          {{ label }}
+      {{#if icon_right}}
+          <i class="fa {{ icon_right }}"></i>
+      {{/if}}
     `;
   }
 }

@@ -4,7 +4,12 @@ export default class ButtonLink extends Block {
   constructor(props: any) {
     super("button", {
       ...props,
-      className: `button button__${props.color}`,
+      className: `button-link button-link__${props.color}`,
+      attrs: {
+        href: props.href,
+        page: props.page,
+        id: props.id,
+      },
       events: {
         click: props.onClick,
       },
@@ -12,15 +17,13 @@ export default class ButtonLink extends Block {
   }
   public render(): string {
     return `
-    <a class="button-link button-link__{{color}}" href="{{href}}" page="{{page}}" id="{{ id }}">
-        {{#if icon_left}}
-            <i class="fa {{ icon_left }}"></i>
-        {{/if}}
-        {{ label }}
-        {{#if icon_right}}
-            <i class="fa {{ icon_right }}"></i>
-        {{/if}}
-    </a>
+    {{#if icon_left}}
+        <i class="fa {{ icon_left }}"></i>
+    {{/if}}
+    {{ label }}
+    {{#if icon_right}}
+        <i class="fa {{ icon_right }}"></i>
+    {{/if}}
     `;
   }
 }
