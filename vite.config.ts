@@ -9,4 +9,7 @@ export default defineConfig({
     plugins: [
         handlebars()
     ],
+    server: {
+        port: 3000,
+    },
 })
