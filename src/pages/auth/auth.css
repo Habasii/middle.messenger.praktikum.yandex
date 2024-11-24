@@ -1,0 +1,6 @@
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    padding: 50px 30px 30px;
+    width: 340px;
+}
