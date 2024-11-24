@@ -1,0 +1,83 @@
+.selected-user-top-info {
+    height: 100px;
+    box-sizing: border-box;
+    background-color: var(--main-color);
+    border: 2px solid black;
+    margin: 16px 16px 16px 0px;
+    border-radius: 12px;
+}
+
+.profile-top-info {
+    height: 100px;
+    box-sizing: border-box;
+    background-color: transparent;
+    border: 2px solid transparent;
+    margin: 16px 16px 16px 0px;
+    border-radius: 12px;
+}
+
+.top-chat-box,
+.top-profile-box {
+    display: flex;
+    height: 100%;
+}
+
+.avatar,
+.user-chat-info,
+.buttons {
+    display: inline-block;
+    margin: auto;
+    text-align: center;
+    font-size: 24pt;
+}
+
+.avatar {
+    margin: 4px;
+    color: var(--main-color);
+}
+
+.avatar img {
+    margin: calc(100% - 72px);
+}
+
+.avatar,
+.user-chat-info,
+.fa {
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.avatar,
+.user-chat-info,
+.fa:hover {
+    color: var(--main-color-2);
+}
+
+.user-chat-info {
+    margin: 8px;
+    padding: 4px 8px;
+    text-align: left;
+    font-size: 18pt;
+    color: var(--text-color);
+}
+
+.user-chat-info .input__element {
+    height: 60%;
+    color: var(--main-color);
+}
+
+.top-chat-box>.avatar {
+    width: 80px;
+}
+
+.top-chat-box>.buttons {
+    width: 50px;
+}
+
+.top-chat-box>.user-chat-info {
+    width: calc(100% - 80px - 50px);
+}
+
+.user-profile-top {
+    color: var(--main-color);
+}
