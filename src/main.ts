@@ -2,6 +2,8 @@ import Handlebars from 'handlebars';
 import * as Components from './components';
 import * as Pages from './pages';
 
+import renderDOM from "./core/renderDom";
+
 import cat1 from './assets/01.jpg'
 import cat2 from './assets/02.jpg'
 import cat3 from './assets/03.jpg'
@@ -44,14 +46,22 @@ const pages = {
   'nav': [ Pages.NavigatePage ]
 };
 
-Object.entries(Components).forEach(([ name, template ]) => {
+Object.entries(Components).forEach(([name, template]) => {
+  if (typeof template === "function") {
+    return;
+  }
   Handlebars.registerPartial(name, template);
 });
 
 function navigate(page: string) {
   //@ts-ignore
-  const [ source, context ] = pages[page];
-  const container = document.getElementById('app')!;
+  const [source, context] = pages[page];
+  if (typeof source === "function") {
+    renderDOM(new source({}));
+    return;
+  }
+
+  const container = document.getElementById("app")!;
 
   const temlpatingFunction = Handlebars.compile(source);
   container.innerHTML = temlpatingFunction(context);
