@@ -3,15 +3,25 @@ import Block from "../../core/block";
 
 export default class CatCard extends Block {
   constructor(props:any) {
+    console.log(props);
     super("div", {
       ...props,
-      className: `card ${props.active ? 'card_active' : ''}`,
+      events: {
+        click: props.onClick,
+      },
+      className: props.active ? 'card card_active' : 'card',
       // Card: new ButtonLink({
       //   cats: props.cats,
       // }),
     });
   }
+
+  componentDidUpdate(oldProps:any, newProps:any) {
+    console.log(777);
+  }
+
   public render(): string {
+    console.log(333);
     return `
     <div class="list-avatar-container">
         <img src="{{avatar}}" alt="Аватар {{name}}" />

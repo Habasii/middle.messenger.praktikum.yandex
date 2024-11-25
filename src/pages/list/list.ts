@@ -1,14 +1,14 @@
 import Block from "../../core/block";
 import { ListSearch, ListCat, TopChat, MessageBox } from "../../components";
+import catsMock from "./mockCats";
 
 export default class ListPage extends Block {
   constructor(props:any) {
-    // let active_cat = props.cats.find(c => c.active);
     super("div", {
       ...props,
       className: "container",
       Search: new ListSearch({ label: "Почта", name: "email" }),
-      ListCat: new ListCat({ cats: props.cats }),
+      ListCat: new ListCat({ cats: catsMock }),
       TopChat: new TopChat({ name: 'Имя'/*active_cat.name*/ }),
       MessageBox: new MessageBox({}),
     });
