@@ -1,26 +1,21 @@
+import { ButtonLink } from "../../components";;
 import Block from "../../core/block";
 
 export default class ErrorPage extends Block {
   constructor(props: any) {
     super("button", {
       ...props,
-      className: `button button__${props.color}`,
-      events: {
-        click: props.onClick,
-      },
+      className: `error-container`,
+      BackButton: new ButtonLink({ label: "Назад к чатам", color: "primary", page: "list" }),
     });
   }
   public render(): string {
     return `
-      <button class="button button__{{color}}" id="{{ id }}">
-          {{#if icon_left}}
-              <i class="fa {{ icon_left }}"></i>
-          {{/if}}
-              {{ label }}
-          {{#if icon_right}}
-              <i class="fa {{ icon_right }}"></i>
-          {{/if}}
-      </button>
+        <span class="error-code">{{code}}</span>
+        <span class="error-comment">{{comment}}</span>
+        <div class="error-button-container">
+            {{{ BackButton }}}
+        </div>
     `;
   }
 }

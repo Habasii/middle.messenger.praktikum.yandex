@@ -4,10 +4,6 @@ import * as Pages from './pages';
 
 import renderDOM from "./core/renderDom";
 
-import cat1 from './assets/01.jpg'
-import cat2 from './assets/02.jpg'
-import cat3 from './assets/03.jpg'
-
 const pages = {
   'login': [ Pages.LoginPage ],
   'auth': [ Pages.AuthPage ],
@@ -32,7 +28,7 @@ function navigate(page: string) {
   //@ts-ignore
   const [source, context] = pages[page];
   if (typeof source === "function") {
-    renderDOM(new source({}));
+    renderDOM(new source(context));
     return;
   }
 
