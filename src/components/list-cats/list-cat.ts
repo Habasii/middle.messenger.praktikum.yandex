@@ -7,6 +7,9 @@ export default class ListCat extends Block {
     super("div", {
       ...props,
       activeCatIndex: -1,
+      events: {
+        click: props.onClick,
+      },
       // RemoveCatDialog: new RemoveCatDialog({
       //   onOk: () => this.setProps({ showDialog: false }),
       // }),
@@ -16,6 +19,7 @@ export default class ListCat extends Block {
             ...props,
             onClick: () => {
               this.setProps({ activeCatIndex: index });
+              this.setProps({ active: true });
             },
             onRemove: (cat:any) => {
               this.setProps({ showDialog: true });
@@ -25,18 +29,20 @@ export default class ListCat extends Block {
     });
   }
 
+  getActiveCatIndex(){
+    const { activeCatIndex } = this.props;
+    return activeCatIndex;
+  }
+
   componentDidUpdate(oldProps:any, newProps:any) {
     const { activeCatIndex } = this.props;
     const { cats } = this.children;
-    console.log(activeCatIndex);
 
     cats.forEach((cat:any, index:any) => {
       if (index === activeCatIndex) {
         cat.setProps({ active: true });
-        return;
-      }
-
-      if (cat.props.active) {
+        cat.setProps({ className: 'card card_active' });
+      } else if (cat.props.active) {
         cat.setProps({ active: false });
       }
     });

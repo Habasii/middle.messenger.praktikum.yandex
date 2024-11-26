@@ -8,11 +8,17 @@ export default class ListPage extends Block {
       ...props,
       className: "container",
       Search: new ListSearch({ label: "Почта", name: "email" }),
-      ListCat: new ListCat({ cats: catsMock }),
-      TopChat: new TopChat({ name: 'Имя'/*active_cat.name*/ }),
+      ListCat: new ListCat({ cats: catsMock, onClick: () => {
+        let cat = catsMock[this.children.ListCat.getActiveCatIndex()];
+        if(cat) {
+          this.children.TopChat.setProps({ name: cat.name, avatar: cat.avatar });
+        }
+      } }),
+      TopChat: new TopChat({ name: 'Имя' }),
       MessageBox: new MessageBox({}),
     });
   }
+
   public render(): string {
     return `
         <div class="list-left-block">
