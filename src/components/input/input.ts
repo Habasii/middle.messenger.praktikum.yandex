@@ -2,16 +2,29 @@ import Block from "../../core/block";
 
 export default class Input extends Block {
   constructor(props: any) {
+    let attrs = {
+      ...props.attrs,
+    }
+    if(props.name) attrs.name = props.name;
+    if(props.disabled) attrs.disabled = 'disabled';
+    if(props.id) attrs.id = props.id;
+    attrs.placeholder = props.placeholder || '';
+    
     super("input", {
       ...props,
-      attrs: {
-        placeholder: "",
-      },
+      className: "input__element",
+      attrs,
     });
   }
+
+  componentDidUpdate(oldProps:any, newProps:any) {
+    if(newProps.disabled) this.element.setAttribute('disabled', 'disabled');
+    else this.element.removeAttribute('disabled');
+
+    return true;
+  }
+
   public render(): string {
-    return `
-        <input class="input__element" placeholder name="{{name}}" {{#if disabled}} disabled="disabled" {{/if}} />
-    `;
+    return ``;
   }
 }

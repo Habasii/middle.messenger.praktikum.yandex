@@ -2,15 +2,18 @@ import Block from "../../core/block";
 
 export default class ButtonLink extends Block {
   constructor(props: any) {
+    let attrs = {
+      id: props.id,
+      ...props.attrs,
+    }
+    if(props.page) attrs.page = props.page;
+    if(props.href) attrs.href = props.href;
+    if(props.id) attrs.id = props.id;
+
     super("button", {
       ...props,
       className: `button-link button-link__${props.color}`,
-      attrs: {
-        href: props.href,
-        page: props.page,
-        id: props.id,
-        ...props.attrs,
-      },
+      attrs,
       events: {
         click: props.onClick,
       },

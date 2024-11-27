@@ -1,5 +1,5 @@
 import Block from "../../core/block";
-import Input from "./input";
+import _Input from "./input";
 
 export default class InputField extends Block {
   constructor(props: any) {
@@ -7,18 +7,26 @@ export default class InputField extends Block {
       ...props,
       className: "input",
       change: props.onChange,
-      Input: new Input({
+      _Input: new _Input({
         className: "input__element",
+        disabled: props.disabled,
         events: {
           change: props.onChange,
         },
       }),
     });
   }
+
+  componentDidUpdate(oldProps:any, newProps:any) {
+    this.children._Input.setProps({ disabled: newProps.disabled });
+
+    return true;
+  }
+
   public render(): string {
     return `
         <label class="input__container">
-          {{{Input}}}
+          {{{_Input}}}
           <div class="input__label">{{label}}</div>
         </label>
         <div class="input__error">{{#if error}}{{error}}{{/if}}</div>

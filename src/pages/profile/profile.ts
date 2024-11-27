@@ -1,6 +1,5 @@
 import Block from "../../core/block";
 import { ListSearch, Input, TopChat, ButtonLink } from "../../components";
-import catsMock from "./mockCats";
 
 export default class ListPage extends Block {
   constructor(props:any) {
@@ -13,6 +12,7 @@ export default class ListPage extends Block {
       InputLogin: new Input({
         label: "Логин",
         name: "login",
+        disabled: true,
         onChange: (e:Event) => {
           const value = e.target.value;
           const error = value === "error" ? "Some error is happened." : "";
@@ -31,21 +31,46 @@ export default class ListPage extends Block {
           });
         },
       }),
-      InputEmail: new Input({ label: "Почта", name: "email" }),
-      InputName: new Input({ label: "Имя", name: "first_name" }),
-      InputSecondName: new Input({ label: "Фамилия", name: "second_name" }),
-      InputPhone: new Input({ label: "Телефон", name: "phone" }),
-      InputPassword: new Input({ label: "Пароль", name: "password" }),
-      InputPasswordRepeat: new Input({ label: "Повторите пароль", name: "repeat_password" }),
+      InputEmail: new Input({ label: "Почта", name: "email", disabled: true }),
+      InputName: new Input({ label: "Имя", name: "first_name", disabled: true }),
+      InputSecondName: new Input({ label: "Фамилия", name: "second_name", disabled: true }),
+      InputPhone: new Input({ label: "Телефон", name: "phone", disabled: true }),
+      InputPassword: new Input({ label: "Пароль", name: "password", disabled: true }),
+      InputPasswordRepeat: new Input({ label: "Повторите пароль", name: "repeat_password", disabled: true }),
       
-      ChangeButton: new ButtonLink({ label: "Изменить данные", color: "primary", page: "profile-edit" }),
-      SaveButton: new ButtonLink({ label: "Сохранить", color: "primary", page: "profile" }),
+      ChangeButton: new ButtonLink({
+        label: "Изменить данные",
+        color: "primary",
+        onClick: () => {
+          this.setProps({readonly: false});
+        },
+      }),
+      SaveButton: new ButtonLink({
+        label: "Сохранить",
+        color: "primary",
+        onClick: () => {
+          this.setProps({readonly: true});
+        },
+      }),
       PswdButton: new ButtonLink({ label: "Изменить пароль", color: "link", page: "profile-edit-password" }),
       CancelButton: new ButtonLink({ label: "Отмена", color: "link", page: "profile" }),
       ExitButton: new ButtonLink({ label: "Выйти", color: "link", page: "login" }),
       ChangeAvatarButton: new ButtonLink({ label: "Изменить аватар", color: "link", page: "profile-edit-avatar" }),
     });
   }
+
+
+  componentDidUpdate(oldProps:any, newProps:any) {
+    this.children.InputLogin.setProps({ disabled: newProps.readonly });
+    this.children.InputEmail.setProps({ disabled: newProps.readonly });
+    this.children.InputName.setProps({ disabled: newProps.readonly });
+    this.children.InputSecondName.setProps({ disabled: newProps.readonly });
+    this.children.InputPhone.setProps({ disabled: newProps.readonly });
+    this.children.InputPassword.setProps({ disabled: newProps.readonly });
+    this.children.InputPasswordRepeat.setProps({ disabled: newProps.readonly });
+    return true;
+  }
+
   public render(): string {
     return `
     <div class="list-left-block">
@@ -82,7 +107,7 @@ export default class ListPage extends Block {
                         {{{ PswdButton }}}
                     {{else}}
                         {{{ SaveButton }}}
-                        {{{ CancelButton}}}
+                        {{{ CancelButton }}}
                     {{/if}}
             </div>
         </div>
