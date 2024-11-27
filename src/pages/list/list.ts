@@ -7,7 +7,7 @@ export default class ListPage extends Block {
     super("div", {
       ...props,
       className: "container",
-      Search: new ListSearch({ label: "Почта", name: "email" }),
+      Search: new ListSearch({ label: "Почта", name: "email", profile: false }),
       ListCat: new ListCat({ cats: catsMock, onClick: () => {
         let cat = catsMock[this.children.ListCat.getActiveCatIndex()];
         if(cat) {

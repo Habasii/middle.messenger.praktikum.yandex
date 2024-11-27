@@ -7,7 +7,7 @@ export default class ListPage extends Block {
     super("div", {
       ...props,
       className: "container profile",
-      Search: new ListSearch({ label: "Почта", name: "email" }),
+      Search: new ListSearch({ label: "Почта", name: "email", profile: true }),
       TopChat: new TopChat({ name: 'Имя', profile: true }),
 
       InputLogin: new Input({

@@ -9,6 +9,7 @@ export default class ButtonLink extends Block {
         href: props.href,
         page: props.page,
         id: props.id,
+        ...props.attrs,
       },
       events: {
         click: props.onClick,

@@ -10,18 +10,19 @@ export default class ListSearch extends Block {
         label: "Назад к чатам",
         color: "primary",
         page: "list",
+        icon_right: "fa-cog",
         attrs: {
-          icon_left: "fa-cog",
           href: "#",
           id: "button-profile",
+          xua:1
         }
       }),
       ProfileButton: new ButtonLink({
         label: "Профиль",
         color: "primary",
         page: "profile",
+        icon_left: "fa-cog",
         attrs: {
-          icon_left: "fa-cog",
           href: "#",
           id: "button-list-search",
         }
