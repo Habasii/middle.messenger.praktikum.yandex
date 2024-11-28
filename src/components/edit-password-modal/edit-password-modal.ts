@@ -1,11 +1,13 @@
 import Block from "../../core/block";
 import { Input, Dialog } from "../../components";
+import Validation from "../../core/validation";
 
 class DialogBody extends Block {
   constructor() {
     super("p", {
-      InputPassword: new Input({ label: "Пароль", name: "password" }),
-      InputPasswordRepeat: new Input({ label: "Повторите пароль", name: "repeat_password" }),
+      formState: {},
+      InputPassword: new Input({ label: "Пароль", name: "password", onChange: (e:Event) => Validation(this, e.target, 'InputPassword', 'password') }),
+      InputPasswordRepeat: new Input({ label: "Повторите пароль", name: "repeat_password", onChange: (e:Event) => Validation(this, e.target, 'InputPasswordRepeat', 'password') }),
     });
   }
 
@@ -24,7 +26,16 @@ export default class EditPasswordModal extends Block {
       Dialog: new Dialog({
         title: "Изменение пароля",
         labelOk: "Сохранить",
-        onOk: props.onOk,
+        onOk: () => {
+          let controller:any = this.children.Dialog.children.Body;
+          let errors: string[] = [
+            Validation(controller, document.querySelector('.dialog__body [name="password"]'), 'InputPassword', 'password'),
+            Validation(controller, document.querySelector('.dialog__body [name="repeat_password"]'), 'InputPasswordRepeat', 'password')
+          ].filter(c => c);
+          console.log(controller.props.formState);
+
+          if(errors.length == 0) props.onOk();
+        },
         Body: new DialogBody(),
       }),
     });

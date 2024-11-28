@@ -8,6 +8,7 @@ export default class InputField extends Block {
       className: "input",
       change: props.onChange,
       _Input: new _Input({
+        ...props,
         className: "input__element",
         disabled: props.disabled,
         events: {

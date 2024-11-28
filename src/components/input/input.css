@@ -1,5 +1,6 @@
 .input {
     padding: 10px;
+    position: relative;
 }
 
 .input__container {
@@ -26,7 +27,7 @@
     border-bottom: 1px solid var(--main-color);
     font-size: 13px;
     font-weight: 500;
-    color: var(--text-color);
+    color: var(--main-color);
     padding-bottom: 7px;
     background-color: rgba(0, 0, 0, 0);
 }

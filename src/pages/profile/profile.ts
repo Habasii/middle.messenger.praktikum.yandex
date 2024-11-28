@@ -1,42 +1,24 @@
 import Block from "../../core/block";
 import { ListSearch, Input, TopChat, ButtonLink, EditPasswordModal, EditAvatarModal } from "../../components";
+import Validation from "../../core/validation";
 
 export default class ListPage extends Block {
   constructor(props:any) {
     super("div", {
       ...props,
+      formState: {},
       className: "container profile",
-      Search: new ListSearch({ label: "Почта", name: "email", profile: true }),
+      Search: new ListSearch({ label: "Поиск", name: "search", profile: true }),
       TopChat: new TopChat({ name: 'Имя', profile: true }),
 
-      InputLogin: new Input({
-        label: "Логин",
-        name: "login",
-        disabled: true,
-        onChange: (e:Event) => {
-          const value = e.target.value;
-          const error = value === "error" ? "Some error is happened." : "";
-          this.children.InputLogin.setProps({
-            error,
-          });
-          if (!error) {
-            return;
-          }
+      InputLogin: new Input({ label: "Логин", name: "login", disabled: true, onChange: (e:Event) => Validation(this, e.target, 'InputLogin', 'login') }),
+      InputEmail: new Input({ label: "Почта", name: "email", disabled: true, onChange: (e:Event) => Validation(this, e.target, 'InputEmail', 'email') }),
+      InputName: new Input({ label: "Имя", name: "first_name", disabled: true, onChange: (e:Event) => Validation(this, e.target, 'InputName', 'first_name') }),
+      InputSecondName: new Input({ label: "Фамилия", name: "second_name", disabled: true, onChange: (e:Event) => Validation(this, e.target, 'InputSecondName', 'second_name') }),
+      InputPhone: new Input({ label: "Телефон", name: "phone", disabled: true, onChange: (e:Event) => Validation(this, e.target, 'InputPhone', 'phone') }),
+      InputPassword: new Input({ label: "Пароль", name: "password", disabled: true, onChange: (e:Event) => Validation(this, e.target, 'InputPassword', 'password') }),
+      InputPasswordRepeat: new Input({ label: "Повторите пароль", name: "repeat_password", disabled: true, onChange: (e:Event) => Validation(this, e.target, 'InputPasswordRepeat', 'password') }),
 
-          this.setProps({
-            formState: {
-              ...this.props.formState,
-              login: value,
-            },
-          });
-        },
-      }),
-      InputEmail: new Input({ label: "Почта", name: "email", disabled: true }),
-      InputName: new Input({ label: "Имя", name: "first_name", disabled: true }),
-      InputSecondName: new Input({ label: "Фамилия", name: "second_name", disabled: true }),
-      InputPhone: new Input({ label: "Телефон", name: "phone", disabled: true }),
-      InputPassword: new Input({ label: "Пароль", name: "password", disabled: true }),
-      InputPasswordRepeat: new Input({ label: "Повторите пароль", name: "repeat_password", disabled: true }),
       ChangeButton: new ButtonLink({
         label: "Изменить данные",
         color: "primary",
@@ -48,7 +30,18 @@ export default class ListPage extends Block {
         label: "Сохранить",
         color: "primary",
         onClick: () => {
-          this.setProps({readonly: true});
+          let errors: string[] = [
+            Validation(this, document.querySelector('[name="login"]'), 'InputLogin', 'login'),
+            Validation(this, document.querySelector('[name="email"]'), 'InputEmail', 'email'),
+            Validation(this, document.querySelector('[name="first_name"]'), 'InputName', 'first_name'),
+            Validation(this, document.querySelector('[name="second_name"]'), 'InputSecondName', 'second_name'),
+            Validation(this, document.querySelector('[name="phone"]'), 'InputPhone', 'phone'),
+            Validation(this, document.querySelector('[name="password"]'), 'InputPassword', 'password'),
+            Validation(this, document.querySelector('[name="repeat_password"]'), 'InputPasswordRepeat', 'password')
+          ].filter(c => c);
+          console.log(this.props.formState);
+
+          if(errors.length == 0) this.setProps({readonly: true});
         },
       }),
       PswdButton: new ButtonLink({

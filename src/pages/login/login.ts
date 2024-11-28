@@ -1,45 +1,34 @@
 import { Button, ButtonLink, Input } from "../../components";
 import Block from "../../core/block";
+import Validation from "../../core/validation";
+import { GoTo } from "../../core/functions";
 
 export default class LoginPage extends Block {
   constructor(props:any) {
     super("div", {
       ...props,
-      formState: {
-        login: "",
-        password: "",
-      },
-      errors: {
-        login: "",
-        password: "",
-      },
+      formState: {},
       className: "container",
-      InputLogin: new Input({
-        label: "Логин",
-        onChange: (e:any) => {
-          const value = e.target.value;
-          const error = value === "error" ? "Some error is happened." : "";
-          this.children.InputLogin.setProps({
-            error,
-          });
-          if (!error) {
-            return;
+      InputLogin: new Input({ label: "Логин", name: "login", onChange: (e:Event) => Validation(this, e.target, 'InputLogin', 'login') }),
+      InputPassword: new Input({ label: "Пароль", name: "password", onChange: (e:Event) => Validation(this, e.target, 'InputPassword', 'password') }),
+      SignInButton: new ButtonLink({
+        label: "Войти",
+        color: "primary",
+        onClick: () => {
+          let errors: string[] = [
+            Validation(this, document.querySelector('[name="login"]'), 'InputLogin', 'login'),
+            Validation(this, document.querySelector('[name="password"]'), 'InputPassword', 'password')
+          ].filter(c => c);
+          console.log(this.props.formState);
+          
+          if(errors.length == 0) {
+            GoTo('list');
           }
-
-          this.setProps({
-            formState: {
-              ...this.props.formState,
-              login: value,
-            },
-          });
-        },
+        }
       }),
-      InputPassword: new Input({ label: "Логин" }),
-      SignInButton: new ButtonLink({ label: "Войти", color: "primary", page: "list" }),
       SignUpButton: new ButtonLink({
         label: "Нет аккаунта?",
         color: "link",
-        onClick: () => console.log(this.props.formState),
         page: 'auth',
       }),
     });
