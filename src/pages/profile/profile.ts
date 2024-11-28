@@ -1,5 +1,5 @@
 import Block from "../../core/block";
-import { ListSearch, Input, TopChat, ButtonLink } from "../../components";
+import { ListSearch, Input, TopChat, ButtonLink, EditPasswordModal, EditAvatarModal } from "../../components";
 
 export default class ListPage extends Block {
   constructor(props:any) {
@@ -37,7 +37,6 @@ export default class ListPage extends Block {
       InputPhone: new Input({ label: "Телефон", name: "phone", disabled: true }),
       InputPassword: new Input({ label: "Пароль", name: "password", disabled: true }),
       InputPasswordRepeat: new Input({ label: "Повторите пароль", name: "repeat_password", disabled: true }),
-      
       ChangeButton: new ButtonLink({
         label: "Изменить данные",
         color: "primary",
@@ -52,10 +51,26 @@ export default class ListPage extends Block {
           this.setProps({readonly: true});
         },
       }),
-      PswdButton: new ButtonLink({ label: "Изменить пароль", color: "link", page: "profile-edit-password" }),
+      PswdButton: new ButtonLink({
+        label: "Изменить пароль",
+        color: "link",
+        onClick: () => this.setProps({ editPasswrdDialog: true }),
+      }),
       CancelButton: new ButtonLink({ label: "Отмена", color: "link", page: "profile" }),
       ExitButton: new ButtonLink({ label: "Выйти", color: "link", page: "login" }),
-      ChangeAvatarButton: new ButtonLink({ label: "Изменить аватар", color: "link", page: "profile-edit-avatar" }),
+      ChangeAvatarButton: new ButtonLink({
+        label: "Изменить аватар",
+        color: "link",
+        onClick: () => this.setProps({ editAvatarDialog: true }),
+      }),
+
+      EditPasswordModal: new EditPasswordModal({
+        onOk: () => this.setProps({ editPasswrdDialog: false }),
+      }),
+
+      EditAvatarModal: new EditAvatarModal({
+        onOk: () => this.setProps({ editAvatarDialog: false }),
+      }),
     });
   }
 
@@ -112,6 +127,14 @@ export default class ListPage extends Block {
             </div>
         </div>
     </div>
+
+    {{#if editPasswrdDialog}}
+        {{{ EditPasswordModal }}}
+    {{/if}}
+    
+    {{#if editAvatarDialog}}
+        {{{ EditAvatarModal }}}
+    {{/if}}
     `;
   }
 }

@@ -58,3 +58,12 @@
     position: absolute;
     cursor: pointer;
 }
+
+.avatar-container button{
+    position: inherit;
+    color: transparent;
+}
+
+.avatar-container:hover button{
+    color: var(--main-color-2);
+}
