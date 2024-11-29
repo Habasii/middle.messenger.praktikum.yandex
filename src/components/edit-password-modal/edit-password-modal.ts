@@ -7,8 +7,8 @@ class DialogBody extends Block {
     super("p", {
       formState: {},
       errors: [],
-      InputPassword: new Input({ label: "Пароль", name: "password", onChange: (e:Event) => Validation(this, e.target, 'InputPassword', 'password') }),
-      InputPasswordRepeat: new Input({ label: "Повторите пароль", name: "repeat_password", onChange: (e:Event) => Validation(this, e.target, 'InputPasswordRepeat', 'password') }),
+      InputPassword: new Input({ label: "Пароль", name: "password", onBlur: (e:Event) => Validation(this, e.target, 'InputPassword', 'password') }),
+      InputPasswordRepeat: new Input({ label: "Повторите пароль", name: "repeat_password", onBlur: (e:Event) => Validation(this, e.target, 'InputPasswordRepeat', 'password') }),
     });
   }
 

@@ -7,12 +7,14 @@ export default class InputField extends Block {
       ...props,
       className: "input",
       change: props.onChange,
+      blur: props.onBlur,
       _Input: new _Input({
         ...props,
         className: "input-element",
         disabled: props.disabled,
         events: {
           change: props.onChange,
+          blur: props.onBlur,
         },
       }),
     });

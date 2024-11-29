@@ -10,8 +10,8 @@ export default class LoginPage extends Block {
       formState: {},
       errors: [],
       className: "container",
-      InputLogin: new Input({ label: "Логин", name: "login", onChange: (e:Event) => Validation(this, e.target, 'InputLogin', 'login') }),
-      InputPassword: new Input({ label: "Пароль", name: "password", onChange: (e:Event) => Validation(this, e.target, 'InputPassword', 'password') }),
+      InputLogin: new Input({ label: "Логин", name: "login", onBlur: (e:Event) => Validation(this, e.target, 'InputLogin', 'login') }),
+      InputPassword: new Input({ label: "Пароль", name: "password", onBlur: (e:Event) => Validation(this, e.target, 'InputPassword', 'password') }),
       SignInButton: new ButtonLink({
         label: "Войти",
         color: "primary",

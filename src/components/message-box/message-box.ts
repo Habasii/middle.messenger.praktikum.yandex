@@ -11,7 +11,7 @@ export default class MessageBox extends Block {
       formState: {},
       errors: [],
       className: 'message-box',
-      InputMessage: new Input({ name: "message" }),
+      InputMessage: new Input({ name: "message", onBlur: (e:Event) => Validation(this, e.target, 'InputMessage', 'message') }),
       ButtonIconSubmit: new ButtonIcon({
         icon: "fa-arrow-right",
         onClick: () => {

@@ -18,7 +18,9 @@ export default class Block {
   eventBus:Function;
   // children:any;
   props: {
+    errors?: string[];
     events?: any;
+    formState?: any;
   };
   id:string;
 

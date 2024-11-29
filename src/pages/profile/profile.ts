@@ -12,13 +12,13 @@ export default class ListPage extends Block {
       Search: new ListSearch({ label: "Поиск", name: "search", profile: true }),
       TopChat: new TopChat({ name: 'Имя', profile: true }),
 
-      InputLogin: new Input({ label: "Логин", name: "login", disabled: true, onChange: (e:Event) => Validation(this, e.target, 'InputLogin', 'login') }),
-      InputEmail: new Input({ label: "Почта", name: "email", disabled: true, onChange: (e:Event) => Validation(this, e.target, 'InputEmail', 'email') }),
-      InputName: new Input({ label: "Имя", name: "first_name", disabled: true, onChange: (e:Event) => Validation(this, e.target, 'InputName', 'first_name') }),
-      InputSecondName: new Input({ label: "Фамилия", name: "second_name", disabled: true, onChange: (e:Event) => Validation(this, e.target, 'InputSecondName', 'second_name') }),
-      InputPhone: new Input({ label: "Телефон", name: "phone", disabled: true, onChange: (e:Event) => Validation(this, e.target, 'InputPhone', 'phone') }),
-      InputPassword: new Input({ label: "Пароль", name: "password", disabled: true, onChange: (e:Event) => Validation(this, e.target, 'InputPassword', 'password') }),
-      InputPasswordRepeat: new Input({ label: "Повторите пароль", name: "repeat_password", disabled: true, onChange: (e:Event) => Validation(this, e.target, 'InputPasswordRepeat', 'password') }),
+      InputLogin: new Input({ label: "Логин", name: "login", disabled: true, onBlur: (e:Event) => Validation(this, e.target, 'InputLogin', 'login') }),
+      InputEmail: new Input({ label: "Почта", name: "email", disabled: true, onBlur: (e:Event) => Validation(this, e.target, 'InputEmail', 'email') }),
+      InputName: new Input({ label: "Имя", name: "first_name", disabled: true, onBlur: (e:Event) => Validation(this, e.target, 'InputName', 'first_name') }),
+      InputSecondName: new Input({ label: "Фамилия", name: "second_name", disabled: true, onBlur: (e:Event) => Validation(this, e.target, 'InputSecondName', 'second_name') }),
+      InputPhone: new Input({ label: "Телефон", name: "phone", disabled: true, onBlur: (e:Event) => Validation(this, e.target, 'InputPhone', 'phone') }),
+      InputPassword: new Input({ label: "Пароль", name: "password", disabled: true, onBlur: (e:Event) => Validation(this, e.target, 'InputPassword', 'password') }),
+      InputPasswordRepeat: new Input({ label: "Повторите пароль", name: "repeat_password", disabled: true, onBlur: (e:Event) => Validation(this, e.target, 'InputPasswordRepeat', 'password') }),
 
       ChangeButton: new ButtonLink({
         label: "Изменить данные",
