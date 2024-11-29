@@ -28,7 +28,7 @@ export default class EditPasswordModal extends Block {
         title: "Изменение пароля",
         labelOk: "Сохранить",
         onOk: () => {
-          let controller:any = this.children.Dialog.children.Body;
+          const controller:any = this.children.Dialog.children.Body;
           controller.props.errors = [
             Validation(controller, document.querySelector('.dialog-body [name="password"]'), 'InputPassword', 'password'),
             Validation(controller, document.querySelector('.dialog-body [name="repeat_password"]'), 'InputPasswordRepeat', 'password')

@@ -1,11 +1,15 @@
-import { Button, ButtonLink, Input } from "../../components";
+import { ButtonLink, Input } from "../../components";
 import Block from "../../core/block";
-import renderDOM from "../../core/renderDom";
 import Validation from "../../core/validation";
 import { GoTo } from "../../core/functions";
 
+interface AuthPageProps extends Block {
+  className: string;
+  formState: Record<string, string>;
+}
+
 export default class AuthPage extends Block {
-  constructor(props:any) {
+  constructor(props:AuthPageProps) {
     super("div", {
       ...props,
       formState: {},

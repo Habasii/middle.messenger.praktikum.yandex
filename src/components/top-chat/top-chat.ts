@@ -1,12 +1,14 @@
 import Block from "../../core/block";
 
-export default class TopChat extends Block {
+interface TopChatProps extends Block {
   profile: boolean;
+}
 
-  constructor(props:any) {
+export default class TopChat extends Block {
+  constructor(props: TopChatProps) {
     super("div", {
       ...props,
-      className: `${props.profile ? 'profile' : 'selected-user'}-top-info`,
+      className: `${props.profile ? "profile" : "selected-user"}-top-info`,
     });
   }
   public render(): string {

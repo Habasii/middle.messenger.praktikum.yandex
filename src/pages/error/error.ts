@@ -1,8 +1,14 @@
-import { ButtonLink } from "../../components";;
+import { ButtonLink } from "../../components";
 import Block from "../../core/block";
 
+interface ErrorPageProps extends Block {
+  code?: string;
+  comment?: string;
+  onClick: () => void;
+}
+
 export default class ErrorPage extends Block {
-  constructor(props: any) {
+  constructor(props: ErrorPageProps) {
     super("button", {
       ...props,
       className: `error-container`,

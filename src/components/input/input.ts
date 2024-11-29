@@ -1,8 +1,29 @@
 import Block from "../../core/block";
 
+interface InputProps extends Block {
+  className: string;
+  name?: string;
+  placeholder?: string;
+  disabled?: boolean;
+  type?: string;
+  attrs: {
+    name?:string;
+    disabled?:string;
+    placeholder?:string;
+    id?:string;
+  };
+  events?: Record<string, (e:Event) => void|string>;
+  onBlur?: (e:Event) => void|string;
+}
+
 export default class Input extends Block {
-  constructor(props: any) {
-    let attrs = {
+  constructor(props: InputProps) {
+    const attrs: {
+      name?:string;
+      disabled?:string;
+      placeholder?:string;
+      id?:string;
+    } = {
       ...props.attrs,
     }
     if(props.name) attrs.name = props.name;
@@ -17,7 +38,7 @@ export default class Input extends Block {
     });
   }
 
-  componentDidUpdate(oldProps:any, newProps:any) {
+  componentDidUpdate(oldProps:InputProps, newProps:InputProps) {
     if(newProps.disabled) this.element.setAttribute('disabled', 'disabled');
     else this.element.removeAttribute('disabled');
 

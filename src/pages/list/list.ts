@@ -2,20 +2,25 @@ import Block from "../../core/block";
 import { ListSearch, ListCat, TopChat, MessageBox } from "../../components";
 import catsMock from "./mockCats";
 
+interface ListPagerops extends Block {
+  className: string;
+  formState: Record<string, string>;
+}
+
 export default class ListPage extends Block {
-  constructor(props:any) {
+  constructor(props:ListPagerops) {
     super("div", {
       ...props,
       className: "container",
       Search: new ListSearch({ label: "Почта", name: "email", profile: false }),
       ListCat: new ListCat({ cats: catsMock, onClick: () => {
-        let cat = catsMock[this.children.ListCat.getActiveCatIndex()];
+        const cat = catsMock[this.children.ListCat.getActiveCatIndex()];
         if(cat) {
           this.children.TopChat.setProps({ name: cat.name, avatar: cat.avatar });
         }
       } }),
       TopChat: new TopChat({ name: 'Имя' }),
-      MessageBox: new MessageBox({}),
+      MessageBox: new MessageBox({ profile: false }),
     });
   }
 

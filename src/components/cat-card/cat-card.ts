@@ -1,8 +1,13 @@
-import { ButtonLink, Input } from "..";
 import Block from "../../core/block";
 
+interface CatCardProps extends Block {
+  onClick: () => void;
+  onRemove: () => void;
+  active: boolean;
+}
+
 export default class CatCard extends Block {
-  constructor(props:any) {
+  constructor(props:CatCardProps) {
     super("div", {
       ...props,
       events: {

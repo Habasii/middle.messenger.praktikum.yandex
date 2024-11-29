@@ -1,8 +1,30 @@
 import Block from "../../core/block";
 
+interface ButtonLinkProps {
+  label?: string;
+  id?: string;
+  disabled?: boolean;
+  placeholder?: string;
+  href?: string;
+  page?: string;
+  color?: string;
+  onClick: () => void;
+  icon_right: string;
+  icon_left: string;
+  attrs?: {
+    page?:string;
+    href?:string;
+    id?:string;
+  };
+}
+
 export default class ButtonLink extends Block {
-  constructor(props: any) {
-    let attrs = {
+  constructor(props: ButtonLinkProps) {
+    const attrs: {
+      page?:string;
+      href?:string;
+      id?:string;
+    } = {
       id: props.id,
       ...props.attrs,
     }

@@ -1,7 +1,17 @@
 import Block from "../../core/block";
 
+interface ButtonProps extends Block {
+  label: string;
+  disabled: boolean;
+  placeholder: string;
+  href: string;
+  page: string;
+  color?: string;
+  onClick: () => void;
+}
+
 export default class Button extends Block {
-  constructor(props: any) {
+  constructor(props: ButtonProps) {
     super("button", {
       ...props,
       className: `button button-${props.color}`,

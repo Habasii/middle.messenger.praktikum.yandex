@@ -1,14 +1,16 @@
+import Block from "./block";
+
 function validationConditions(code:string, value:string){
   let error = null;
 
   switch(code){
     case 'login':
-      if(!/^[A-Za-z\d\_\-]{3,20}$/.test(value)) error = "Только буквы, цыфры и -/_. От 3 до 20 символов.";
+      if(!/^[A-Za-z\d_-]{3,20}$/.test(value)) error = "Только буквы, цыфры и -/_. От 3 до 20 символов.";
       else if(/^\d+$/.test(value)) error = 'Не может состоять только из цыфр.';
       break;
     case 'first_name':
     case 'second_name':
-      if(!/^[A-ZА-Я]+[\w\-]*$/.test(value)) error = "Первая буква должна быть заглавной, без спецсимволов (только дефис)";
+      if(!/^[A-ZА-Я]+[\w-]*$/.test(value)) error = "Первая буква должна быть заглавной, без спецсимволов (только дефис)";
       break;
     case 'email':
       if(!/^\w+([.-_]?\w+)@\w+([.-]?\w+)(.\w)$/.test(value)) error = "Не соответствует формату";
@@ -30,13 +32,13 @@ function validationConditions(code:string, value:string){
   return error;
 }
 
-export default function Validation(controller:any, target:any, alias:string, code:string): string {
+export default function Validation(controller:Block, target:any, alias:string, code:string): string {
   const value = target.value;
   const error = validationConditions(code, value);
   controller.children[alias].setProps({ error });
   if (!error) return '';
 
-  let formState:any = {
+  const formState:Record<string, string> = {
       ...controller.props.formState,
     };
     

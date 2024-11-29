@@ -3,8 +3,13 @@ import Block from "../../core/block";
 import Validation from "../../core/validation";
 import { GoTo } from "../../core/functions";
 
+interface LoginPageProps extends Block {
+  className: string;
+  formState: Record<string, string>;
+}
+
 export default class LoginPage extends Block {
-  constructor(props:any) {
+  constructor(props:LoginPageProps) {
     super("div", {
       ...props,
       formState: {},

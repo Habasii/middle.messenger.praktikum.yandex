@@ -5,7 +5,7 @@ interface BlockConstructable<P = any> {
   new (props: P): Block;
 }
 
-export default function registerComponent<Props extends any>(
+export default function registerComponent<Props>(
   Component: BlockConstructable<Props>,
 ) {
   Handlebars.registerHelper(

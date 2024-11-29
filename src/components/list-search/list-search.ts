@@ -1,8 +1,16 @@
 import { ButtonLink, Input } from "..";
 import Block from "../../core/block";
 
+interface ListSearchProps extends Block {
+  id: string;
+  onClick: () => void;
+  label?: string;
+  name?: string;
+  profile?: boolean;
+}
+
 export default class ListSearch extends Block {
-  constructor(props:any) {
+  constructor(props:ListSearchProps) {
     super("div", {
       ...props,
       className: "list-search-box",
@@ -14,7 +22,6 @@ export default class ListSearch extends Block {
         attrs: {
           href: "#",
           id: "button-profile",
-          xua:1
         }
       }),
       ProfileButton: new ButtonLink({

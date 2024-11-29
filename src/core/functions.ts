@@ -1,5 +1,5 @@
 function GoTo(page:any) {
-  let div = document.createElement('div');
+  const div = document.createElement('div');
   div.setAttribute('page', page);
   document.body.append(div);
   div.click();

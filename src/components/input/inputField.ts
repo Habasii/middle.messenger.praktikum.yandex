@@ -1,8 +1,24 @@
 import Block from "../../core/block";
 import _Input from "./input";
 
+interface InputFieldProps extends Block {
+  className: string;
+  label: string;
+  name: string;
+  disabled: boolean;
+  placeholder: string;
+  onBlur: () => void;
+  onChange: () => void;
+  attrs?: {
+    name?: string;
+    disabled?: string;
+    placeholder?: string;
+    id?: string;
+  };
+}
+
 export default class InputField extends Block {
-  constructor(props: any) {
+  constructor(props: InputFieldProps) {
     super("div", {
       ...props,
       className: "input",
@@ -20,7 +36,7 @@ export default class InputField extends Block {
     });
   }
 
-  componentDidUpdate(oldProps:any, newProps:any) {
+  componentDidUpdate(oldProps: InputFieldProps, newProps: InputFieldProps) {
     this.children._Input.setProps({ disabled: newProps.disabled });
 
     return true;

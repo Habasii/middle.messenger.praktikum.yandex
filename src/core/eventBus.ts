@@ -1,15 +1,17 @@
+type Function = () => void;
+
 export default class EventBus<E extends string> {
   private listeners: Record<string, Function[]>;
   constructor() {
     this.listeners = {};
   }
-  on(event: E, callback: Function) {
+  on(event: E, callback: (() => void)) {
     if (!this.listeners[event]) {
       this.listeners[event] = [];
     }
     this.listeners[event].push(callback);
   }
-  off(event: E, callback: Function) {
+  off(event: E, callback: () => void) {
     if (!this.listeners[event]) {
       throw new Error(`Нет события: ${event}`);
     }

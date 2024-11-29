@@ -2,8 +2,13 @@ import Block from "../../core/block";
 import { ListSearch, Input, TopChat, ButtonLink, EditPasswordModal, EditAvatarModal } from "../../components";
 import Validation from "../../core/validation";
 
+interface ListPageProps extends Block {
+  className: string;
+  formState: Record<string, string>;
+}
+
 export default class ListPage extends Block {
-  constructor(props:any) {
+  constructor(props:ListPageProps) {
     super("div", {
       ...props,
       formState: {},

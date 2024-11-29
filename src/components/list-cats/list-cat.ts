@@ -1,9 +1,19 @@
-import { ButtonLink, Input } from "..";
 import Block from "../../core/block";
 import { CatCard } from "../cat-card";
 
+interface ListCatProps extends Block {
+  activeCatIndex: number;
+  active: boolean;
+  cats: {
+    onClick: () => void;
+    onRemove: () => void;
+  }[];
+  onClick: () => void;
+  showDialog: boolean;
+}
+
 export default class ListCat extends Block {
-  constructor(props:any) {
+  constructor(props:ListCatProps) {
     super("div", {
       ...props,
       activeCatIndex: -1,
@@ -14,14 +24,14 @@ export default class ListCat extends Block {
       //   onOk: () => this.setProps({ showDialog: false }),
       // }),
       cats: props.cats.map(
-        (props:any, index:any) =>
+        (props:ListCatProps, index:number) =>
           new CatCard({
             ...props,
             onClick: () => {
               this.setProps({ activeCatIndex: index });
               this.setProps({ active: true });
             },
-            onRemove: (cat:any) => {
+            onRemove: () => {
               this.setProps({ showDialog: true });
             },
           }),
@@ -34,11 +44,11 @@ export default class ListCat extends Block {
     return activeCatIndex;
   }
 
-  componentDidUpdate(oldProps:any, newProps:any) {
+  componentDidUpdate(oldProps:ListCatProps, newProps:ListCatProps) {
     const { activeCatIndex } = this.props;
     const { cats } = this.children;
 
-    cats.forEach((cat:any, index:any) => {
+    cats.forEach((cat:any, index:number) => {
       if (index === activeCatIndex) {
         cat.setProps({ active: true });
         cat.setProps({ className: 'card card-active' });
