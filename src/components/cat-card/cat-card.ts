@@ -7,7 +7,7 @@ interface CatCardProps extends Block {
 }
 
 export default class CatCard extends Block {
-  constructor(props:CatCardProps) {
+  constructor(props: CatCardProps) {
     super("div", {
       ...props,
       events: {

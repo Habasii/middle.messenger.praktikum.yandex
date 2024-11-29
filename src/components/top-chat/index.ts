@@ -1,2 +1,2 @@
-import './top-chat.css'
-export { default as TopChat } from './top-chat';
+import "./top-chat.css";
+export { default as TopChat } from "./top-chat";

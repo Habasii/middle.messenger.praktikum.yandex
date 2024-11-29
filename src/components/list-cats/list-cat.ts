@@ -13,7 +13,7 @@ interface ListCatProps extends Block {
 }
 
 export default class ListCat extends Block {
-  constructor(props:ListCatProps) {
+  constructor(props: ListCatProps) {
     super("div", {
       ...props,
       activeCatIndex: -1,
@@ -24,7 +24,7 @@ export default class ListCat extends Block {
       //   onOk: () => this.setProps({ showDialog: false }),
       // }),
       cats: props.cats.map(
-        (props:ListCatProps, index:number) =>
+        (props: ListCatProps, index: number) =>
           new CatCard({
             ...props,
             onClick: () => {
@@ -34,24 +34,24 @@ export default class ListCat extends Block {
             onRemove: () => {
               this.setProps({ showDialog: true });
             },
-          }),
+          })
       ),
     });
   }
 
-  getActiveCatIndex(){
+  getActiveCatIndex() {
     const { activeCatIndex } = this.props;
     return activeCatIndex;
   }
 
-  componentDidUpdate(oldProps:ListCatProps, newProps:ListCatProps) {
+  componentDidUpdate(oldProps: ListCatProps, newProps: ListCatProps) {
     const { activeCatIndex } = this.props;
     const { cats } = this.children;
 
-    cats.forEach((cat:any, index:number) => {
+    cats.forEach((cat: any, index: number) => {
       if (index === activeCatIndex) {
         cat.setProps({ active: true });
-        cat.setProps({ className: 'card card-active' });
+        cat.setProps({ className: "card card-active" });
       } else if (cat.props.active) {
         cat.setProps({ active: false });
       }

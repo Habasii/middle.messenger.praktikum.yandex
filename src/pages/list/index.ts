@@ -1,2 +1,2 @@
-import './list.css'
-export { default as ListPage } from './list';
+import "./list.css";
+export { default as ListPage } from "./list";

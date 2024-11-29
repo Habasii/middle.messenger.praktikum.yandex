@@ -1,20 +1,32 @@
-import Handlebars from 'handlebars';
-import * as Components from './components';
-import * as Pages from './pages';
+import Handlebars from "handlebars";
+import * as Components from "./components";
+import * as Pages from "./pages";
 
 import renderDOM from "./core/renderDom";
 
 const pages = {
-  'login': [ Pages.LoginPage ],
-  'auth': [ Pages.AuthPage ],
-  'profile': [ Pages.ProfilePage, { readonly: true } ],
-  'profile-edit': [ Pages.ProfilePage ],
-  'profile-edit-password': [ Pages.ProfilePage, { readonly: true, editPasswrdDialog: true } ],
-  'profile-edit-avatar': [ Pages.ProfilePage, { readonly: true, editAvatarDialog: true } ],
-  'error-404': [ Pages.ErrorPage, { code: '404', comment: 'Страница не найдена.' } ],
-  'error-500': [ Pages.ErrorPage, { code: '500', comment: 'Внутренняя ошибка сервера.' } ],
-  'list': [ Pages.ListPage, { showDialog: true }],
-  'nav': [ Pages.NavigatePage ]
+  login: [Pages.LoginPage],
+  auth: [Pages.AuthPage],
+  profile: [Pages.ProfilePage, { readonly: true }],
+  "profile-edit": [Pages.ProfilePage],
+  "profile-edit-password": [
+    Pages.ProfilePage,
+    { readonly: true, editPasswrdDialog: true },
+  ],
+  "profile-edit-avatar": [
+    Pages.ProfilePage,
+    { readonly: true, editAvatarDialog: true },
+  ],
+  "error-404": [
+    Pages.ErrorPage,
+    { code: "404", comment: "Страница не найдена." },
+  ],
+  "error-500": [
+    Pages.ErrorPage,
+    { code: "500", comment: "Внутренняя ошибка сервера." },
+  ],
+  list: [Pages.ListPage, { showDialog: true }],
+  nav: [Pages.NavigatePage],
 };
 
 Object.entries(Components).forEach(([name, template]) => {
@@ -38,11 +50,11 @@ function navigate(page: string) {
   container.innerHTML = temlpatingFunction(context);
 }
 
-document.addEventListener('DOMContentLoaded', () => navigate('nav'));
+document.addEventListener("DOMContentLoaded", () => navigate("nav"));
 
-document.addEventListener('click', e => {
+document.addEventListener("click", (e) => {
   //@ts-ignore
-  const page = e.target.getAttribute('page');
+  const page = e.target.getAttribute("page");
   if (page) {
     navigate(page);
 

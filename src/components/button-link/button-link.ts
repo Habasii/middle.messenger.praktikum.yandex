@@ -12,25 +12,25 @@ interface ButtonLinkProps {
   icon_right: string;
   icon_left: string;
   attrs?: {
-    page?:string;
-    href?:string;
-    id?:string;
+    page?: string;
+    href?: string;
+    id?: string;
   };
 }
 
 export default class ButtonLink extends Block {
   constructor(props: ButtonLinkProps) {
     const attrs: {
-      page?:string;
-      href?:string;
-      id?:string;
+      page?: string;
+      href?: string;
+      id?: string;
     } = {
       id: props.id,
       ...props.attrs,
-    }
-    if(props.page) attrs.page = props.page;
-    if(props.href) attrs.href = props.href;
-    if(props.id) attrs.id = props.id;
+    };
+    if (props.page) attrs.page = props.page;
+    if (props.href) attrs.href = props.href;
+    if (props.id) attrs.id = props.id;
 
     super("button", {
       ...props,

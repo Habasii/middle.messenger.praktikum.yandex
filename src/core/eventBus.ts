@@ -5,7 +5,7 @@ export default class EventBus<E extends string> {
   constructor() {
     this.listeners = {};
   }
-  on(event: E, callback: (() => void)) {
+  on(event: E, callback: () => void) {
     if (!this.listeners[event]) {
       this.listeners[event] = [];
     }
@@ -16,7 +16,7 @@ export default class EventBus<E extends string> {
       throw new Error(`Нет события: ${event}`);
     }
     this.listeners[event] = this.listeners[event].filter(
-      (listener) => listener !== callback,
+      (listener) => listener !== callback
     );
   }
   emit<T extends any[] = []>(event: E, ...args: T) {

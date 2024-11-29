@@ -21,11 +21,11 @@ export default class Block {
     FLOW_RENDER: "flow:render",
   };
 
-  _element: HTMLElement|null = null;
+  _element: HTMLElement | null = null;
   _meta: {
     tagName: string;
     props: BlockProps;
-  }|null = null;
+  } | null = null;
   _id: string = nanoid(6);
   id: string;
   _eventBus: Record<string, () => void>;
@@ -40,7 +40,7 @@ export default class Block {
    *
    * @returns {void}
    */
-  constructor(tagName:string = "div", propsWithChildren:BlockProps = {}) {
+  constructor(tagName: string = "div", propsWithChildren: BlockProps = {}) {
     const eventBus = new EventBus();
     this.eventBus = () => eventBus;
     this.id = this._id;
@@ -59,7 +59,7 @@ export default class Block {
     eventBus.emit(Block.EVENTS.INIT);
   }
 
-  _registerEvents(eventBus:EventBus<string>) {
+  _registerEvents(eventBus: EventBus<string>) {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
@@ -67,7 +67,7 @@ export default class Block {
   }
 
   _createResources() {
-    const { tagName, props} = this._meta;
+    const { tagName, props } = this._meta;
     this._element = this._createDocumentElement(tagName);
     if (typeof props.className === "string") {
       const classes = props.className.split(" ");
@@ -86,9 +86,9 @@ export default class Block {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  _getChildrenAndProps(propsAndChildren:BlockProps) {
-    const children:BlockProps = {};
-    const props:BlockProps = {};
+  _getChildrenAndProps(propsAndChildren: BlockProps) {
+    const children: BlockProps = {};
+    const props: BlockProps = {};
 
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (Array.isArray(value)) {
@@ -112,17 +112,17 @@ export default class Block {
     return { children, props };
   }
 
-  _componentDidMount(oldProps:BlockProps) {
+  _componentDidMount(oldProps: BlockProps) {
     this.componentDidMount(oldProps);
   }
 
-  componentDidMount(oldProps:BlockProps) {}
+  componentDidMount(oldProps: BlockProps) {}
 
   dispatchComponentDidMount() {
     this._eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
-  _componentDidUpdate(oldProps:BlockProps, newProps:BlockProps) {
+  _componentDidUpdate(oldProps: BlockProps, newProps: BlockProps) {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (!response) {
       return;
@@ -130,11 +130,11 @@ export default class Block {
     this._render();
   }
 
-  componentDidUpdate(oldProps:BlockProps, newProps:BlockProps) {
+  componentDidUpdate(oldProps: BlockProps, newProps: BlockProps) {
     return true;
   }
 
-  setProps = (nextProps:BlockProps) => {
+  setProps = (nextProps: BlockProps) => {
     if (!nextProps) {
       return;
     }
@@ -149,7 +149,7 @@ export default class Block {
   _addEvents() {
     const { events = {} } = this.props;
 
-    Object.keys(events).forEach((eventName:string) => {
+    Object.keys(events).forEach((eventName: string) => {
       this._element.addEventListener(eventName, events[eventName]);
     });
   }
@@ -163,19 +163,19 @@ export default class Block {
   }
 
   _compile() {
-    const propsAndStubs:BlockProps = { ...this.props };
+    const propsAndStubs: BlockProps = { ...this.props };
 
     Object.entries(this.children).forEach(([key, child]) => {
       if (Array.isArray(child)) {
         propsAndStubs[key] = child.map(
-          (component) => `<div data-id="${component._id}"></div>`,
+          (component) => `<div data-id="${component._id}"></div>`
         );
       } else {
         propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
       }
     });
 
-    const fragment:any = this._createDocumentElement("template");
+    const fragment: any = this._createDocumentElement("template");
     const template = Handlebars.compile(this.render());
     fragment.innerHTML = template(propsAndStubs);
 
@@ -183,7 +183,7 @@ export default class Block {
       if (Array.isArray(child)) {
         child.forEach((component) => {
           const stub = fragment.content.querySelector(
-            `[data-id="${component._id}"]`,
+            `[data-id="${component._id}"]`
           );
 
           stub?.replaceWith(component.getContent());
@@ -219,7 +219,7 @@ export default class Block {
     return this.element;
   }
 
-  _makePropsProxy(props:BlockProps) {
+  _makePropsProxy(props: BlockProps) {
     const eventBus = this.eventBus();
     const emitBind = eventBus.emit.bind(eventBus);
 
@@ -243,7 +243,7 @@ export default class Block {
     });
   }
 
-  _createDocumentElement(tagName:string) {
+  _createDocumentElement(tagName: string) {
     // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
     return document.createElement(tagName);
   }

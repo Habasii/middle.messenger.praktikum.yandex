@@ -12,7 +12,11 @@ export default class ErrorPage extends Block {
     super("button", {
       ...props,
       className: `error-container`,
-      BackButton: new ButtonLink({ label: "Назад к чатам", color: "primary", page: "list" }),
+      BackButton: new ButtonLink({
+        label: "Назад к чатам",
+        color: "primary",
+        page: "list",
+      }),
     });
   }
   public render(): string {

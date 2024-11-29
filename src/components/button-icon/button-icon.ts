@@ -10,7 +10,7 @@ interface ButtonIconProps extends Block {
 export default class ButtonIcon extends Block {
   profile: boolean;
 
-  constructor(props:ButtonIconProps) {
+  constructor(props: ButtonIconProps) {
     super("i", {
       ...props,
       className: `fa ${props.icon}`,

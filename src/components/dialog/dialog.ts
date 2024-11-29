@@ -10,7 +10,7 @@ interface DialogProps extends Block {
 }
 
 export default class Dialog extends Block {
-  constructor(props:DialogProps) {
+  constructor(props: DialogProps) {
     super("div", {
       ...props,
       className: "dialog-container",

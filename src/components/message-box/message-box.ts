@@ -3,7 +3,7 @@ import Block from "../../core/block";
 import Validation from "../../core/validation";
 
 interface MessageBoxProps extends Block {
-  profile:boolean;
+  profile: boolean;
   errors?: string[];
   events?: Record<string, () => void>;
   formState?: Record<string, string>;
@@ -12,19 +12,28 @@ interface MessageBoxProps extends Block {
 export default class MessageBox extends Block {
   profile: boolean;
 
-  constructor(props:MessageBoxProps) {
+  constructor(props: MessageBoxProps) {
     super("div", {
       ...props,
       formState: {},
       errors: [],
-      className: 'message-box',
-      InputMessage: new Input({ name: "message", onBlur: (e:Event) => Validation(this, e.target, 'InputMessage', 'message') }),
+      className: "message-box",
+      InputMessage: new Input({
+        name: "message",
+        onBlur: (e: Event) =>
+          Validation(this, e.target, "InputMessage", "message"),
+      }),
       ButtonIconSubmit: new ButtonIcon({
         icon: "fa-arrow-right",
         onClick: () => {
           this.props.errors = [
-            Validation(this, document.querySelector('[name="message"]'), 'InputMessage', 'message'),
-          ].filter(c => c);
+            Validation(
+              this,
+              document.querySelector('[name="message"]'),
+              "InputMessage",
+              "message"
+            ),
+          ].filter((c) => c);
           console.log(this.props.formState);
         },
       }),

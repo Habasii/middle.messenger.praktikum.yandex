@@ -8,18 +8,24 @@ interface ListPagerops extends Block {
 }
 
 export default class ListPage extends Block {
-  constructor(props:ListPagerops) {
+  constructor(props: ListPagerops) {
     super("div", {
       ...props,
       className: "container",
       Search: new ListSearch({ label: "Почта", name: "email", profile: false }),
-      ListCat: new ListCat({ cats: catsMock, onClick: () => {
-        const cat = catsMock[this.children.ListCat.getActiveCatIndex()];
-        if(cat) {
-          this.children.TopChat.setProps({ name: cat.name, avatar: cat.avatar });
-        }
-      } }),
-      TopChat: new TopChat({ name: 'Имя' }),
+      ListCat: new ListCat({
+        cats: catsMock,
+        onClick: () => {
+          const cat = catsMock[this.children.ListCat.getActiveCatIndex()];
+          if (cat) {
+            this.children.TopChat.setProps({
+              name: cat.name,
+              avatar: cat.avatar,
+            });
+          }
+        },
+      }),
+      TopChat: new TopChat({ name: "Имя" }),
       MessageBox: new MessageBox({ profile: false }),
     });
   }

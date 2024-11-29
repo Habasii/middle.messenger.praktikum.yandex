@@ -7,8 +7,18 @@ class DialogBody extends Block {
     super("p", {
       formState: {},
       errors: [],
-      InputPassword: new Input({ label: "Пароль", name: "password", onBlur: (e:Event) => Validation(this, e.target, 'InputPassword', 'password') }),
-      InputPasswordRepeat: new Input({ label: "Повторите пароль", name: "repeat_password", onBlur: (e:Event) => Validation(this, e.target, 'InputPasswordRepeat', 'password') }),
+      InputPassword: new Input({
+        label: "Пароль",
+        name: "password",
+        onBlur: (e: Event) =>
+          Validation(this, e.target, "InputPassword", "password"),
+      }),
+      InputPasswordRepeat: new Input({
+        label: "Повторите пароль",
+        name: "repeat_password",
+        onBlur: (e: Event) =>
+          Validation(this, e.target, "InputPasswordRepeat", "password"),
+      }),
     });
   }
 
@@ -28,14 +38,24 @@ export default class EditPasswordModal extends Block {
         title: "Изменение пароля",
         labelOk: "Сохранить",
         onOk: () => {
-          const controller:any = this.children.Dialog.children.Body;
+          const controller: any = this.children.Dialog.children.Body;
           controller.props.errors = [
-            Validation(controller, document.querySelector('.dialog-body [name="password"]'), 'InputPassword', 'password'),
-            Validation(controller, document.querySelector('.dialog-body [name="repeat_password"]'), 'InputPasswordRepeat', 'password')
-          ].filter(c => c);
+            Validation(
+              controller,
+              document.querySelector('.dialog-body [name="password"]'),
+              "InputPassword",
+              "password"
+            ),
+            Validation(
+              controller,
+              document.querySelector('.dialog-body [name="repeat_password"]'),
+              "InputPasswordRepeat",
+              "password"
+            ),
+          ].filter((c) => c);
           console.log(controller.props.formState);
 
-          if(controller.props.errors.length == 0) props.onOk();
+          if (controller.props.errors.length == 0) props.onOk();
         },
         Body: new DialogBody(),
       }),

@@ -10,7 +10,7 @@ interface ListSearchProps extends Block {
 }
 
 export default class ListSearch extends Block {
-  constructor(props:ListSearchProps) {
+  constructor(props: ListSearchProps) {
     super("div", {
       ...props,
       className: "list-search-box",
@@ -22,7 +22,7 @@ export default class ListSearch extends Block {
         attrs: {
           href: "#",
           id: "button-profile",
-        }
+        },
       }),
       ProfileButton: new ButtonLink({
         label: "Профиль",
@@ -32,7 +32,7 @@ export default class ListSearch extends Block {
         attrs: {
           href: "#",
           id: "button-list-search",
-        }
+        },
       }),
       InputSearch: new Input({
         label: "Поиск",

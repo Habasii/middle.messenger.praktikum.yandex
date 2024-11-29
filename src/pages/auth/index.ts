@@ -1,2 +1,2 @@
-import './auth.css'
-export { default as AuthPage } from './auth';
+import "./auth.css";
+export { default as AuthPage } from "./auth";
