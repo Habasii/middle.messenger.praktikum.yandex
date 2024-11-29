@@ -9,6 +9,7 @@ export default class AuthPage extends Block {
     super("div", {
       ...props,
       formState: {},
+      errors: [],
       className: "container",
       InputLogin: new Input({ label: "Логин", name: "login", onChange: (e:Event) => Validation(this, e.target, 'InputLogin', 'login') }),
       InputEmail: new Input({ label: "Почта", name: "email", onChange: (e:Event) => Validation(this, e.target, 'InputEmail', 'email') }),
@@ -23,7 +24,7 @@ export default class AuthPage extends Block {
         label: "Зарегистироваться",
         color: "primary",
         onClick: () => {
-          let errors: string[] = [
+          this.props.errors = [
             Validation(this, document.querySelector('[name="login"]'), 'InputLogin', 'login'),
             Validation(this, document.querySelector('[name="email"]'), 'InputEmail', 'email'),
             Validation(this, document.querySelector('[name="first_name"]'), 'InputName', 'first_name'),
@@ -34,7 +35,7 @@ export default class AuthPage extends Block {
           ].filter(c => c);
           console.log(this.props.formState);
           
-          if(errors.length == 0) {
+          if(this.props.errors.length == 0) {
             GoTo('login');
           }
         }

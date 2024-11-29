@@ -8,6 +8,7 @@ export default class LoginPage extends Block {
     super("div", {
       ...props,
       formState: {},
+      errors: [],
       className: "container",
       InputLogin: new Input({ label: "Логин", name: "login", onChange: (e:Event) => Validation(this, e.target, 'InputLogin', 'login') }),
       InputPassword: new Input({ label: "Пароль", name: "password", onChange: (e:Event) => Validation(this, e.target, 'InputPassword', 'password') }),
@@ -15,13 +16,13 @@ export default class LoginPage extends Block {
         label: "Войти",
         color: "primary",
         onClick: () => {
-          let errors: string[] = [
+          this.props.errors = [
             Validation(this, document.querySelector('[name="login"]'), 'InputLogin', 'login'),
             Validation(this, document.querySelector('[name="password"]'), 'InputPassword', 'password')
           ].filter(c => c);
           console.log(this.props.formState);
           
-          if(errors.length == 0) {
+          if(this.props.errors.length == 0) {
             GoTo('list');
           }
         }

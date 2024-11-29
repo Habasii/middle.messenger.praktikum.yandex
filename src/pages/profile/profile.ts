@@ -7,6 +7,7 @@ export default class ListPage extends Block {
     super("div", {
       ...props,
       formState: {},
+      errors: [],
       className: "container profile",
       Search: new ListSearch({ label: "Поиск", name: "search", profile: true }),
       TopChat: new TopChat({ name: 'Имя', profile: true }),
@@ -30,7 +31,7 @@ export default class ListPage extends Block {
         label: "Сохранить",
         color: "primary",
         onClick: () => {
-          let errors: string[] = [
+          this.props.errors = [
             Validation(this, document.querySelector('[name="login"]'), 'InputLogin', 'login'),
             Validation(this, document.querySelector('[name="email"]'), 'InputEmail', 'email'),
             Validation(this, document.querySelector('[name="first_name"]'), 'InputName', 'first_name'),
@@ -41,7 +42,7 @@ export default class ListPage extends Block {
           ].filter(c => c);
           console.log(this.props.formState);
 
-          if(errors.length == 0) this.setProps({readonly: true});
+          if(this.props.errors.length == 0) this.setProps({readonly: true});
         },
       }),
       PswdButton: new ButtonLink({
