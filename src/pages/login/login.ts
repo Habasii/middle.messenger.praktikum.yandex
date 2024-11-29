@@ -1,4 +1,4 @@
-import { Button, ButtonLink, Input } from "../../components";
+import { ButtonLink, Input } from "../../components";
 import Block from "../../core/block";
 import Validation from "../../core/validation";
 import { GoTo } from "../../core/functions";
