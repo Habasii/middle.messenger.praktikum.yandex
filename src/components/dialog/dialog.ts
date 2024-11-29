@@ -21,11 +21,11 @@ export default class Dialog extends Block {
   render(): string {
     return `
     <div class="dialog">
-        <h2 class="dialog__title">{{title}}</h2>
-        <div class="dialog__body">
+        <h2 class="dialog-title">{{title}}</h2>
+        <div class="dialog-body">
             {{{ Body }}}
         </div>
-        <div class="dialog__footer">
+        <div class="dialog-footer">
             {{{ OkButton }}}
             {{#if labelCancel}}
                 {{{ CancelButton }}}

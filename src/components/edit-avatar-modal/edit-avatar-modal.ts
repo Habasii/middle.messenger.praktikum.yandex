@@ -10,7 +10,7 @@ class DialogBody extends Block {
 
   render(): string {
     return `
-      <input class="input__element-img" name="файл не выбран" type="file" />
+      <input class="input-element-img" name="файл не выбран" type="file" />
     `;
   }
 }

@@ -13,7 +13,7 @@ export default class CatCard extends Block {
 
   public render(): string {
     return `
-    <div class="card {{#if active}}card_active{{/if}}">
+    <div class="card {{#if active}}card-active{{/if}}">
       <div class="list-avatar-container">
           <img src="{{avatar}}" alt="Аватар {{name}}" />
       </div>

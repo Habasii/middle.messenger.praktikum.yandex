@@ -9,7 +9,7 @@ export default class InputField extends Block {
       change: props.onChange,
       _Input: new _Input({
         ...props,
-        className: "input__element",
+        className: "input-element",
         disabled: props.disabled,
         events: {
           change: props.onChange,
@@ -26,11 +26,11 @@ export default class InputField extends Block {
 
   public render(): string {
     return `
-        <label class="input__container">
+        <label class="input-container">
           {{{_Input}}}
-          <div class="input__label">{{label}}</div>
+          <div class="input-label">{{label}}</div>
         </label>
-        <div class="input__error">{{#if error}}{{error}}{{/if}}</div>
+        <div class="input-error">{{#if error}}{{error}}{{/if}}</div>
     `;
   }
 }

@@ -29,8 +29,8 @@ export default class EditPasswordModal extends Block {
         onOk: () => {
           let controller:any = this.children.Dialog.children.Body;
           let errors: string[] = [
-            Validation(controller, document.querySelector('.dialog__body [name="password"]'), 'InputPassword', 'password'),
-            Validation(controller, document.querySelector('.dialog__body [name="repeat_password"]'), 'InputPasswordRepeat', 'password')
+            Validation(controller, document.querySelector('.dialog-body [name="password"]'), 'InputPassword', 'password'),
+            Validation(controller, document.querySelector('.dialog-body [name="repeat_password"]'), 'InputPasswordRepeat', 'password')
           ].filter(c => c);
           console.log(controller.props.formState);
 

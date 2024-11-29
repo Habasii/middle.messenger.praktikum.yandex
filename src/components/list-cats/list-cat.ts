@@ -41,7 +41,7 @@ export default class ListCat extends Block {
     cats.forEach((cat:any, index:any) => {
       if (index === activeCatIndex) {
         cat.setProps({ active: true });
-        cat.setProps({ className: 'card card_active' });
+        cat.setProps({ className: 'card card-active' });
       } else if (cat.props.active) {
         cat.setProps({ active: false });
       }

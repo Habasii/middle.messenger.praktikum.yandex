@@ -14,11 +14,11 @@
 }
 
 .error-comment {
-    margin: 30px 0px;
+    margin: 30px 0;
     color: var(--main-color);
 }
 
 .error-button-container {
     width: 17ch;
-    margin: 0px auto;
+    margin: 0 auto;
 }

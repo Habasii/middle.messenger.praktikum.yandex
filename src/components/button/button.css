@@ -9,13 +9,13 @@
   cursor: pointer;
 }
 
-.button__primary {
+.button-primary {
   background-color: var(--main-color);
   color: var(--text-color);
   font-size: 13px;
 }
 
-.button__link {
+.button-link {
   color: var(--main-color);
   font-size: 11px;
   text-align: center;
@@ -28,8 +28,8 @@
   border-radius: 50%;
 }
 
-.button-arrow__left,
-.button-arrow__right {
+.button-arrow-left,
+.button-arrow-right {
   margin: 0 auto;
   width: 11px;
   height: 1.6px;
@@ -37,10 +37,10 @@
   background-color: var(--text-color);
 }
 
-.button-arrow__left::after,
-.button-arrow__left::before,
-.button-arrow__right::after,
-.button-arrow__right::before {
+.button-arrow-left::after,
+.button-arrow-left::before,
+.button-arrow-right::after,
+.button-arrow-right::before {
   content: "";
   background-color: #fff;
   display: inline-block;
@@ -49,23 +49,23 @@
   position: absolute;
 }
 
-.button-arrow__right::after {
+.button-arrow-right::after {
   transform: rotate(45deg);
   bottom: 2px;
 }
 
-.button-arrow__right::before {
+.button-arrow-right::before {
   transform: rotate(-45deg);
   top: 2px;
 }
 
-.button-arrow__left::after {
+.button-arrow-left::after {
   transform: rotate(-45deg);
   bottom: 2px;
   left: -1px;
 }
 
-.button-arrow__left::before {
+.button-arrow-left::before {
   transform: rotate(45deg);
   top: 2px;
   left: -1px;

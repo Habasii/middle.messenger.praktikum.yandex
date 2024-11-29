@@ -12,7 +12,7 @@ export default class ButtonLink extends Block {
 
     super("button", {
       ...props,
-      className: `button-link button-link__${props.color}`,
+      className: `button-link button-link-${props.color}`,
       attrs,
       events: {
         click: props.onClick,

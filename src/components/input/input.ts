@@ -12,7 +12,7 @@ export default class Input extends Block {
     
     super("input", {
       ...props,
-      className: "input__element",
+      className: "input-element",
       attrs,
     });
   }

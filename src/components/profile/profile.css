@@ -1,7 +1,7 @@
 .profile .profile-info {
     height: calc(100% - 100px - 16px * 3);
     box-sizing: border-box;
-    margin: 0px 16px 16px 0px;
+    margin: 0 16px 16px 0;
     background-color: var(--main-color-3);
     border: 2px solid black;
     border-radius: 12px;
@@ -50,7 +50,7 @@
 }
 
 .avatar-container:hover .profile-avatar {
-    background-color: var(--main-color--text-secondary-color);
+    background-color: var(--main-color);
 }
 
 .avatar-container:hover a {

@@ -4,7 +4,7 @@ export default class Button extends Block {
   constructor(props: any) {
     super("button", {
       ...props,
-      className: `button button__${props.color}`,
+      className: `button button-${props.color}`,
       attrs: {
         href: props.href,
         page: props.page,

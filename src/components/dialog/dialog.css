@@ -1,5 +1,5 @@
 .dialog-container {
-    background-color: hsla(32, 49%, 67%, 0.5);
+    background-color: hsl(32deg 49% 67% / 50%);
     height: 100%;
     width: 100%;
     position: absolute;
@@ -19,17 +19,17 @@
     padding: 40px;
 }
 
-.dialog__title {
+.dialog-title {
     text-align: center;
     margin: 0;
     color: var(--main-color);
 }
 
-.dialog__body {
+.dialog-body {
     padding: 45px 0;
 }
 
-.dialog__footer {
+.dialog-footer {
     display: flex;
     flex-direction: column;
 }
