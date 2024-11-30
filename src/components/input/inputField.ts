@@ -3,22 +3,19 @@ import _Input from "./input";
 
 interface InputFieldProps extends Block {
   className: string;
-  label: string;
-  name: string;
+  label?: string;
+  type?: string;
+  name?: string;
   disabled: boolean;
   placeholder: string;
-  onBlur: () => void;
-  onChange: () => void;
-  attrs?: {
-    name?: string;
-    disabled?: string;
-    placeholder?: string;
-    id?: string;
-  };
+  onBlur?: (E: Event) => any;
+  onChange?: (E: Event) => any;
+  attrs?: any;
+  events?: any;
 }
 
 export default class InputField extends Block {
-  constructor(props: InputFieldProps) {
+  constructor(props: any) {
     super("div", {
       ...props,
       className: "input",

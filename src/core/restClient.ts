@@ -75,7 +75,7 @@ class HTTPTransport {
   };
 }
 
-function queryStringify(data) {
+function queryStringify(data: any) {
   if (typeof data !== "object") {
     throw new Error("Data must be object");
   }
@@ -86,10 +86,10 @@ function queryStringify(data) {
   }, "?");
 }
 
-function fetchWithRetry(url, options = {}) {
+function fetchWithRetry(url:string, options = {}): any {
   const { tries = 1 } = options;
 
-  function onError(err) {
+  function onError(err:any): any {
     const triesLeft = tries - 1;
     if (!triesLeft) {
       throw err;

@@ -1,16 +1,8 @@
 import Block from "../../core/block";
 import { ButtonLink } from "../index";
 
-interface DialogProps extends Block {
-  onClick: () => void;
-  onOk: () => void;
-  labelOk: string;
-  title: string;
-  Body: Block;
-}
-
 export default class Dialog extends Block {
-  constructor(props: DialogProps) {
+  constructor(props: any) {
     super("div", {
       ...props,
       className: "dialog-container",

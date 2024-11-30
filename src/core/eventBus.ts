@@ -1,4 +1,4 @@
-type Function = () => void;
+type Function = () => any;
 
 export default class EventBus<E extends string> {
   private listeners: Record<string, Function[]>;

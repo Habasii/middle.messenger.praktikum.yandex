@@ -13,18 +13,15 @@ interface ListCatProps extends Block {
 }
 
 export default class ListCat extends Block {
-  constructor(props: ListCatProps) {
+  constructor(props: any) {
     super("div", {
       ...props,
       activeCatIndex: -1,
       events: {
         click: props.onClick,
       },
-      // RemoveCatDialog: new RemoveCatDialog({
-      //   onOk: () => this.setProps({ showDialog: false }),
-      // }),
       cats: props.cats.map(
-        (props: ListCatProps, index: number) =>
+        (props: any, index: number) =>
           new CatCard({
             ...props,
             onClick: () => {

@@ -2,16 +2,6 @@ import EventBus from "./eventBus";
 import { nanoid } from "nanoid";
 import Handlebars from "handlebars";
 
-interface BlockProps {
-  errors?: string[];
-  events?: Record<string, () => void>;
-  formState?: Record<string, string>;
-  className?: string;
-  attrs?: Record<string, string>;
-  change?: () => void;
-  blur?: () => void;
-}
-
 // Нельзя создавать экземпляр данного класса
 export default class Block {
   static EVENTS = {
@@ -21,17 +11,16 @@ export default class Block {
     FLOW_RENDER: "flow:render",
   };
 
-  _element: HTMLElement | null = null;
+  _element: any;
   _meta: {
     tagName: string;
-    props: BlockProps;
-  } | null = null;
+    props: any;
+  };
   _id: string = nanoid(6);
   id: string;
-  _eventBus: Record<string, () => void>;
-  eventBus: () => void;
-  children: BlockProps;
-  props: BlockProps;
+  eventBus: () => any;
+  children: any;
+  props: any;
   // getContent: () => HTMLElement;
 
   /** JSDoc
@@ -40,7 +29,7 @@ export default class Block {
    *
    * @returns {void}
    */
-  constructor(tagName: string = "div", propsWithChildren: BlockProps = {}) {
+  constructor(tagName: string = "div", propsWithChildren: any = {}) {
     const eventBus = new EventBus();
     this.eventBus = () => eventBus;
     this.id = this._id;
@@ -86,9 +75,9 @@ export default class Block {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  _getChildrenAndProps(propsAndChildren: BlockProps) {
-    const children: BlockProps = {};
-    const props: BlockProps = {};
+  _getChildrenAndProps(propsAndChildren: any) {
+    const children: any = {};
+    const props: any = {};
 
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (Array.isArray(value)) {
@@ -112,17 +101,17 @@ export default class Block {
     return { children, props };
   }
 
-  _componentDidMount(oldProps: BlockProps) {
+  _componentDidMount(oldProps: any) {
     this.componentDidMount(oldProps);
   }
 
-  componentDidMount(oldProps: BlockProps) {}
+  componentDidMount(oldProps: any) {}
 
-  dispatchComponentDidMount() {
+  dispatchComponentDidMount(oldProps: any) {
     this._eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
-  _componentDidUpdate(oldProps: BlockProps, newProps: BlockProps) {
+  _componentDidUpdate(oldProps: any, newProps: any) {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (!response) {
       return;
@@ -130,11 +119,11 @@ export default class Block {
     this._render();
   }
 
-  componentDidUpdate(oldProps: BlockProps, newProps: BlockProps) {
+  componentDidUpdate(oldProps: any, newProps: any) {
     return true;
   }
 
-  setProps = (nextProps: BlockProps) => {
+  setProps = (nextProps: any) => {
     if (!nextProps) {
       return;
     }
@@ -163,9 +152,9 @@ export default class Block {
   }
 
   _compile() {
-    const propsAndStubs: BlockProps = { ...this.props };
+    const propsAndStubs: any = { ...this.props };
 
-    Object.entries(this.children).forEach(([key, child]) => {
+    Object.entries(this.children).forEach(([key, child]:any) => {
       if (Array.isArray(child)) {
         propsAndStubs[key] = child.map(
           (component) => `<div data-id="${component._id}"></div>`
@@ -179,7 +168,7 @@ export default class Block {
     const template = Handlebars.compile(this.render());
     fragment.innerHTML = template(propsAndStubs);
 
-    Object.values(this.children).forEach((child) => {
+    Object.values(this.children).forEach((child:any) => {
       if (Array.isArray(child)) {
         child.forEach((component) => {
           const stub = fragment.content.querySelector(
@@ -219,17 +208,17 @@ export default class Block {
     return this.element;
   }
 
-  _makePropsProxy(props: BlockProps) {
+  _makePropsProxy(props: any) {
     const eventBus = this.eventBus();
     const emitBind = eventBus.emit.bind(eventBus);
 
-    return new Proxy(props as BlockProps, {
-      get(target, prop) {
-        const value = target[prop];
+    return new Proxy(props as any, {
+      get(target:any, prop:any) {
+        const value:any = target[prop];
         return typeof value === "function" ? value.bind(target) : value;
       },
       set(target, prop, value) {
-        const oldTarget = { ...target };
+        const oldTarget:any = { ...target };
         target[prop] = value;
 
         // Запускаем обновление компоненты

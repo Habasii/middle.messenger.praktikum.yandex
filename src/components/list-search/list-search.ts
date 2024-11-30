@@ -1,16 +1,8 @@
 import { ButtonLink, Input } from "..";
 import Block from "../../core/block";
 
-interface ListSearchProps extends Block {
-  id: string;
-  onClick: () => void;
-  label?: string;
-  name?: string;
-  profile?: boolean;
-}
-
 export default class ListSearch extends Block {
-  constructor(props: ListSearchProps) {
+  constructor(props: any) {
     super("div", {
       ...props,
       className: "list-search-box",

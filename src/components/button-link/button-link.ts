@@ -8,13 +8,16 @@ interface ButtonLinkProps {
   href?: string;
   page?: string;
   color?: string;
-  onClick: () => void;
-  icon_right: string;
-  icon_left: string;
+  onClick?: () => void;
+  icon_right?: string;
+  icon_left?: string;
   attrs?: {
     page?: string;
     href?: string;
     id?: string;
+  };
+  events?: {
+    click?: () => void;
   };
 }
 

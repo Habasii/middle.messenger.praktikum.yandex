@@ -16,7 +16,7 @@ class DialogBody extends Block {
 }
 
 export default class EditAvatarModal extends Block {
-  constructor(props) {
+  constructor(props:any) {
     super("div", {
       ...props,
       Dialog: new Dialog({

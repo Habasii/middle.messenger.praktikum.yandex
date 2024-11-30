@@ -6,18 +6,14 @@ interface InputProps extends Block {
   placeholder?: string;
   disabled?: boolean;
   type?: string;
-  attrs: {
-    name?: string;
-    disabled?: string;
-    placeholder?: string;
-    id?: string;
-  };
-  events?: Record<string, (e: Event) => void | string>;
-  onBlur?: (e: Event) => void | string;
+  attrs: any;
+  events?: any;
+  onBlur?: (e?: Event) => any;
+  onChange?: (e?: Event) => any;
 }
 
 export default class Input extends Block {
-  constructor(props: InputProps) {
+  constructor(props: any) {
     const attrs: {
       name?: string;
       disabled?: string;
