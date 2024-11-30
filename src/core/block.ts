@@ -105,7 +105,9 @@ export default class Block {
     this.componentDidMount(oldProps);
   }
 
-  componentDidMount(oldProps: any) {}
+  componentDidMount(oldProps: any) {
+    if(typeof(oldProps) == 'string') console.log(oldProps);
+  }
 
   dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
@@ -120,6 +122,8 @@ export default class Block {
   }
 
   componentDidUpdate(oldProps: any, newProps: any) {
+    if(typeof(oldProps) == 'string') console.log(oldProps);
+    if(typeof(newProps) == 'string') console.log(newProps);
     return true;
   }
 
