@@ -109,7 +109,8 @@ export default class Block {
     if(typeof(oldProps) == 'string') console.log(oldProps);
   }
 
-  dispatchComponentDidMount() {
+  dispatchComponentDidMount(oldProps: any) {
+    if(typeof(oldProps) == 'string') console.log(oldProps);
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 

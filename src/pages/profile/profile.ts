@@ -163,6 +163,7 @@ export default class ListPage extends Block {
   }
 
   componentDidUpdate(oldProps: any, newProps: any) {
+    if(typeof(oldProps) == 'string') console.log(oldProps);
     this.children.InputLogin.setProps({ disabled: newProps.readonly });
     this.children.InputEmail.setProps({ disabled: newProps.readonly });
     this.children.InputName.setProps({ disabled: newProps.readonly });

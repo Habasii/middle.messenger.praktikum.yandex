@@ -42,6 +42,8 @@ export default class ListCat extends Block {
   }
 
   componentDidUpdate(oldProps: ListCatProps, newProps: ListCatProps) {
+    if(typeof(oldProps) == 'string') console.log(oldProps);
+    if(typeof(newProps) == 'string') console.log(newProps);
     const { activeCatIndex } = this.props;
     const { cats } = this.children;
 

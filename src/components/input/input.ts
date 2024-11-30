@@ -35,6 +35,7 @@ export default class Input extends Block {
   }
 
   componentDidUpdate(oldProps: InputProps, newProps: InputProps) {
+    if(typeof(oldProps) == 'string') console.log(oldProps);
     if (newProps.disabled) this.element.setAttribute("disabled", "disabled");
     else this.element.removeAttribute("disabled");
 
