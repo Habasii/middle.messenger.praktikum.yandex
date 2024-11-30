@@ -2,8 +2,9 @@ import { ButtonLink, Input } from "../../components";
 import Block from "../../core/block";
 import Validation from "../../core/validation";
 import { GoTo } from "../../core/functions";
+import { PropsBlock } from "../../core/types";
 
-interface AuthPageProps extends Block {
+interface AuthPageProps extends PropsBlock {
   className: string;
   formState: Record<string, string>;
 }

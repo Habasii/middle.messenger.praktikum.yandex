@@ -1,4 +1,6 @@
 import Block from "../../core/block";
+import { PropsBlock } from "../../core/types";
+
 import {
   ListSearch,
   Input,
@@ -9,9 +11,13 @@ import {
 } from "../../components";
 import Validation from "../../core/validation";
 
-interface ListPageProps extends Block {
+interface ListPageProps extends PropsBlock {
   className: string;
-  formState: Record<string, string>;
+  formState: {
+    [index:string]: string;
+  };
+  readonly: boolean;
+  editPasswrdDialog: boolean;
 }
 
 export default class ListPage extends Block {
@@ -28,7 +34,7 @@ export default class ListPage extends Block {
         label: "Логин",
         name: "login",
         disabled: true,
-        onBlur: (e: Event) => Validation(this, e.target, "InputLogin", "login"),
+        onBlur: (e:Event) => Validation(this, e.target, "InputLogin", "login"),
       }),
       InputEmail: new Input({
         label: "Почта",
@@ -162,7 +168,7 @@ export default class ListPage extends Block {
     });
   }
 
-  componentDidUpdate(oldProps: any, newProps: any) {
+  componentDidUpdate(oldProps: PropsBlock, newProps: PropsBlock) {
     if(typeof(oldProps) == 'string') console.log(oldProps);
     this.children.InputLogin.setProps({ disabled: newProps.readonly });
     this.children.InputEmail.setProps({ disabled: newProps.readonly });

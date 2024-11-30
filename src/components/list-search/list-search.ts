@@ -1,8 +1,9 @@
 import { ButtonLink, Input } from "..";
 import Block from "../../core/block";
+import { PropsBlock } from "../../core/types";
 
 export default class ListSearch extends Block {
-  constructor(props: any) {
+  constructor(props: PropsBlock) {
     super("div", {
       ...props,
       className: "list-search-box",

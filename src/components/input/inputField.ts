@@ -1,21 +1,22 @@
 import Block from "../../core/block";
 import _Input from "./input";
+import { PropsBlock } from "../../core/types";
 
-interface InputFieldProps extends Block {
+interface InputFieldProps extends PropsBlock {
   className: string;
   label?: string;
   type?: string;
   name?: string;
   disabled: boolean;
   placeholder: string;
-  onBlur?: (E: Event) => any;
-  onChange?: (E: Event) => any;
-  attrs?: any;
-  events?: any;
+  onBlur?: (E: Event) => void;
+  onChange?: (E: Event) => void;
+  change?: (E: Event) => void;
+  blur?: (E: Event) => void;
 }
 
 export default class InputField extends Block {
-  constructor(props: any) {
+  constructor(props: InputFieldProps) {
     super("div", {
       ...props,
       className: "input",
@@ -34,7 +35,7 @@ export default class InputField extends Block {
   }
 
   componentDidUpdate(oldProps: InputFieldProps, newProps: InputFieldProps) {
-    if(typeof(oldProps) == 'string') console.log(oldProps);
+    if (typeof oldProps == "string") console.log(oldProps);
     this.children._Input.setProps({ disabled: newProps.disabled });
 
     return true;

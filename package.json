@@ -9,7 +9,7 @@
     "preview": "vite --port 3000",
     "serve": "vite preview",
     "start": "npm run preview",
-    "lint": "eslint '**/*.js'"
+    "lint": "npx eslint '**/*.ts'"
 
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
 import Block from "./block";
 
-function validationConditions(code: string, value: string) {
+function validationConditions(code: string, value: string): string | null {
   let error = null;
 
   switch (code) {
@@ -44,20 +44,29 @@ function validationConditions(code: string, value: string) {
 
 export default function Validation(
   controller: Block,
-  target: any,
+  target: EventTarget | null,
   alias: string,
   code: string
 ): string {
-  const value = target.value;
+  if (!target) return "";
+
+  const value: string = (target as HTMLInputElement).value;
+
   const error = validationConditions(code, value);
   controller.children[alias].setProps({ error });
   if (!error) return "";
 
-  const formState: Record<string, string> = {
+  const formState: {
+    [index: string]: string;
+  } = {
     ...controller.props.formState,
   };
 
-  formState[target.getAttribute("name")] = value;
+  const name: string | null = target.getAttribute("name");
+  if (name) {
+    formState[name] = value;
+  }
+
   controller.setProps({ formState });
 
   return error;

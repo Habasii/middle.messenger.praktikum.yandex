@@ -1,38 +1,43 @@
 import EventBus from "./eventBus";
 import { nanoid } from "nanoid";
 import Handlebars from "handlebars";
+import { PropsBlock } from "./types";
 
-// Нельзя создавать экземпляр данного класса
-export default class Block {
-  static EVENTS = {
+export default abstract class Block {
+  static EVENTS: {
+    INIT: string;
+    FLOW_CDM: string;
+    FLOW_CDU: string;
+    FLOW_RENDER: string;
+  } = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",
     FLOW_CDU: "flow:component-did-update",
     FLOW_RENDER: "flow:render",
-  };
+  } as const;
 
-  _element: any;
+  _element: HTMLElement;
   _meta: {
     tagName: string;
-    props: any;
+    props: PropsBlock;
   };
   _id: string = nanoid(6);
   id: string;
-  eventBus: () => any;
-  children: any;
-  props: any;
-  // getContent: () => HTMLElement;
+  eventBus: () => EventBus<string>;
+  children: {
+    [index: string]: Block;
+  };
+  props: PropsBlock;
+  className?: string = "";
+  formState?: {
+    [index: string]: string;
+  } = {};
 
-  /** JSDoc
-   * @param {string} tagName
-   * @param {Object} props
-   *
-   * @returns {void}
-   */
-  constructor(tagName: string = "div", propsWithChildren: any = {}) {
+  constructor(tagName: string = "div", propsWithChildren: PropsBlock) {
     const eventBus = new EventBus();
     this.eventBus = () => eventBus;
     this.id = this._id;
+    this._element = document.createElement(tagName);
 
     const { props, children } = this._getChildrenAndProps(propsWithChildren);
     this.children = children;
@@ -48,18 +53,20 @@ export default class Block {
     eventBus.emit(Block.EVENTS.INIT);
   }
 
-  _registerEvents(eventBus: EventBus<string>) {
+  _registerEvents(eventBus: EventBus<string>): void {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
   }
 
-  _createResources() {
+  _createResources(): void {
     const { tagName, props } = this._meta;
+
     this._element = this._createDocumentElement(tagName);
+
     if (typeof props.className === "string") {
-      const classes = props.className.split(" ");
+      const classes: string[] = props.className.split(" ");
       this._element.classList.add(...classes);
     }
 
@@ -70,16 +77,20 @@ export default class Block {
     }
   }
 
-  init() {
+  init(): void {
     this._createResources();
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  _getChildrenAndProps(propsAndChildren: any) {
-    const children: any = {};
-    const props: any = {};
+  _getChildrenAndProps(propsAndChildren: PropsBlock): {
+    children: { [index: string]: Block };
+    props: PropsBlock;
+  } {
+    const children: { [index: string]: Block } = {};
+    const props = {};
 
-    Object.entries(propsAndChildren).forEach(([key, value]) => {
+    Object.keys(propsAndChildren).forEach((key: string) => {
+      const value = propsAndChildren[key];
       if (Array.isArray(value)) {
         value.forEach((obj) => {
           if (obj instanceof Block) {
@@ -101,20 +112,20 @@ export default class Block {
     return { children, props };
   }
 
-  _componentDidMount(oldProps: any) {
+  _componentDidMount(oldProps: PropsBlock): void {
     this.componentDidMount(oldProps);
   }
 
-  componentDidMount(oldProps: any) {
-    if(typeof(oldProps) == 'string') console.log(oldProps);
+  componentDidMount(oldProps: PropsBlock): void {
+    if (typeof oldProps === "string") console.log(oldProps);
   }
 
-  dispatchComponentDidMount(oldProps: any) {
-    if(typeof(oldProps) == 'string') console.log(oldProps);
+  dispatchComponentDidMount(oldProps: PropsBlock): void {
+    if (typeof oldProps === "string") console.log(oldProps);
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
-  _componentDidUpdate(oldProps: any, newProps: any) {
+  _componentDidUpdate(oldProps: PropsBlock, newProps: PropsBlock): void {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (!response) {
       return;
@@ -122,13 +133,13 @@ export default class Block {
     this._render();
   }
 
-  componentDidUpdate(oldProps: any, newProps: any) {
-    if(typeof(oldProps) == 'string') console.log(oldProps);
-    if(typeof(newProps) == 'string') console.log(newProps);
+  componentDidUpdate(oldProps: PropsBlock, newProps: PropsBlock): boolean {
+    if (typeof oldProps === "string") console.log(oldProps);
+    if (typeof newProps === "string") console.log(newProps);
     return true;
   }
 
-  setProps = (nextProps: any) => {
+  setProps = (nextProps: PropsBlock): void => {
     if (!nextProps) {
       return;
     }
@@ -136,11 +147,11 @@ export default class Block {
     Object.assign(this.props, nextProps);
   };
 
-  get element() {
+  get element(): HTMLElement {
     return this._element;
   }
 
-  _addEvents() {
+  _addEvents(): void {
     const { events = {} } = this.props;
 
     Object.keys(events).forEach((eventName: string) => {
@@ -148,32 +159,32 @@ export default class Block {
     });
   }
 
-  _removeEvents() {
+  _removeEvents(): void {
     const { events = {} } = this.props;
 
-    Object.keys(events).forEach((eventName) => {
+    Object.keys(events).forEach((eventName: string) => {
       this._element.removeEventListener(eventName, events[eventName]);
     });
   }
 
-  _compile() {
-    const propsAndStubs: any = { ...this.props };
+  _compile(): HTMLElement {
+    const propsAndStubs: Record<string, PropsBlock> = { ...this.props };
 
-    Object.entries(this.children).forEach(([key, child]:any) => {
+    Object.entries(this.children).forEach(([key, child]) => {
       if (Array.isArray(child)) {
-        propsAndStubs[key] = child.map(
-          (component) => `<div data-id="${component._id}"></div>`
-        );
+        propsAndStubs[key] = child
+          .map((component) => `<div data-id="${component._id}"></div>`)
+          .join("");
       } else {
         propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
       }
     });
 
-    const fragment: any = this._createDocumentElement("template");
+    const fragment: HTMLElement = this._createDocumentElement("template");
     const template = Handlebars.compile(this.render());
     fragment.innerHTML = template(propsAndStubs);
 
-    Object.values(this.children).forEach((child:any) => {
+    Object.values(this.children).forEach((child) => {
       if (Array.isArray(child)) {
         child.forEach((component) => {
           const stub = fragment.content.querySelector(
@@ -192,9 +203,11 @@ export default class Block {
     return fragment.content;
   }
 
-  _render() {
+  _render(): void {
     this._removeEvents();
     const block = this._compile();
+
+    if (!this._element) return;
 
     if (this._element.children.length === 0) {
       this._element.appendChild(block);
@@ -205,29 +218,29 @@ export default class Block {
     this._addEvents();
   }
 
-  render() {
+  render(): string {
     return "";
   }
 
-  getContent(): HTMLElement {
+  getContent(): HTMLElement | undefined {
     return this.element;
   }
 
-  _makePropsProxy(props: any) {
+  _makePropsProxy(props: {
+    [key: string]: PropsBlock;
+  }): ProxyHandler<{ [key: string]: PropsBlock }> {
     const eventBus = this.eventBus();
     const emitBind = eventBus.emit.bind(eventBus);
 
-    return new Proxy(props as any, {
-      get(target:any, prop:any) {
-        const value:any = target[prop];
+    return new Proxy(props as PropsBlock, {
+      get(target, prop: string) {
+        const value = target[prop];
         return typeof value === "function" ? value.bind(target) : value;
       },
-      set(target, prop, value) {
-        const oldTarget:any = { ...target };
+      set(target, prop: string, value: PropsBlock) {
+        const oldTarget = { ...target };
         target[prop] = value;
 
-        // Запускаем обновление компоненты
-        // Плохой cloneDeep, в следующей итерации нужно заставлять добавлять cloneDeep им самим
         emitBind(Block.EVENTS.FLOW_CDU, oldTarget, target);
         return true;
       },
@@ -237,16 +250,15 @@ export default class Block {
     });
   }
 
-  _createDocumentElement(tagName: string) {
-    // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
+  _createDocumentElement(tagName: string): HTMLElement {
     return document.createElement(tagName);
   }
 
-  show() {
-    this.getContent().style.display = "block";
+  show(): void {
+    this.getContent()!.style.display = "block";
   }
 
-  hide() {
-    this.getContent().style.display = "none";
+  hide(): void {
+    this.getContent()!.style.display = "none";
   }
 }

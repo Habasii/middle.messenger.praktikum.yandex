@@ -1,19 +1,25 @@
 import Block from "../../core/block";
 import { CatCard } from "../cat-card";
+import { PropsBlock } from "../../core/types";
 
-interface ListCatProps extends Block {
+interface cat {
+  name: string;
+  avatar: string;
+  date: string;
+  lest_message: string;
+  indicator: number;
+}
+
+interface ListCatProps extends PropsBlock {
   activeCatIndex: number;
   active: boolean;
-  cats: {
-    onClick: () => void;
-    onRemove: () => void;
-  }[];
+  cats: cat[];
   onClick: () => void;
   showDialog: boolean;
 }
 
 export default class ListCat extends Block {
-  constructor(props: any) {
+  constructor(props: ListCatProps) {
     super("div", {
       ...props,
       activeCatIndex: -1,
@@ -21,9 +27,9 @@ export default class ListCat extends Block {
         click: props.onClick,
       },
       cats: props.cats.map(
-        (props: any, index: number) =>
+        (catProps: cat, index: number) =>
           new CatCard({
-            ...props,
+            ...catProps,
             onClick: () => {
               this.setProps({ activeCatIndex: index });
               this.setProps({ active: true });
@@ -42,12 +48,12 @@ export default class ListCat extends Block {
   }
 
   componentDidUpdate(oldProps: ListCatProps, newProps: ListCatProps) {
-    if(typeof(oldProps) == 'string') console.log(oldProps);
-    if(typeof(newProps) == 'string') console.log(newProps);
+    if (typeof oldProps == "string") console.log(oldProps);
+    if (typeof newProps == "string") console.log(newProps);
     const { activeCatIndex } = this.props;
     const { cats } = this.children;
 
-    cats.forEach((cat: any, index: number) => {
+    cats.forEach((cat: Block, index: number) => {
       if (index === activeCatIndex) {
         cat.setProps({ active: true });
         cat.setProps({ className: "card card-active" });

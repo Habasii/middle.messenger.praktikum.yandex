@@ -4,7 +4,7 @@ import * as Pages from "./pages";
 
 import renderDOM from "./core/renderDom";
 
-const pages = {
+const pages: { [key: string]: [typeof Pages[keyof typeof Pages], { [key: string]: boolean | string }?] } = {
   login: [Pages.LoginPage],
   auth: [Pages.AuthPage],
   profile: [Pages.ProfilePage, { readonly: true }],
@@ -37,7 +37,6 @@ Object.entries(Components).forEach(([name, template]) => {
 });
 
 function navigate(page: string) {
-  //@ts-ignore
   const [source, context] = pages[page];
   if (typeof source === "function") {
     renderDOM(new source(context));
@@ -53,7 +52,6 @@ function navigate(page: string) {
 document.addEventListener("DOMContentLoaded", () => navigate("nav"));
 
 document.addEventListener("click", (e) => {
-  //@ts-ignore
   const page = e.target.getAttribute("page");
   if (page) {
     navigate(page);

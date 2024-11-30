@@ -1,19 +1,20 @@
 import Block from "../../core/block";
+import { PropsBlock } from "../../core/types";
 
-interface InputProps extends Block {
+interface InputProps extends PropsBlock {
   className: string;
   name?: string;
   placeholder?: string;
   disabled?: boolean;
   type?: string;
-  attrs: any;
-  events?: any;
-  onBlur?: (e?: Event) => any;
-  onChange?: (e?: Event) => any;
+  id: string;
+  onBlur?: (e?: Event) => void;
+  onChange?: (e?: Event) => void;
+  label: string;
 }
 
 export default class Input extends Block {
-  constructor(props: any) {
+  constructor(props: InputProps) {
     const attrs: {
       name?: string;
       disabled?: string;
@@ -35,7 +36,7 @@ export default class Input extends Block {
   }
 
   componentDidUpdate(oldProps: InputProps, newProps: InputProps) {
-    if(typeof(oldProps) == 'string') console.log(oldProps);
+    if (typeof oldProps == "string") console.log(oldProps);
     if (newProps.disabled) this.element.setAttribute("disabled", "disabled");
     else this.element.removeAttribute("disabled");
 

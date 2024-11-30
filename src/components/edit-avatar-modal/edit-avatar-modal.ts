@@ -1,5 +1,10 @@
 import Block from "../../core/block";
 import { Input, Dialog } from "../../components";
+import { PropsBlock } from "../../core/types";
+
+interface EditAvatarModalProps extends PropsBlock {
+  onOk: () => void;
+}
 
 class DialogBody extends Block {
   constructor() {
@@ -16,7 +21,7 @@ class DialogBody extends Block {
 }
 
 export default class EditAvatarModal extends Block {
-  constructor(props:any) {
+  constructor(props: EditAvatarModalProps) {
     super("div", {
       ...props,
       Dialog: new Dialog({

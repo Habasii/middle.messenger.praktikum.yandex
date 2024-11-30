@@ -1,6 +1,11 @@
 import Block from "../../core/block";
 import { Input, Dialog } from "../../components";
 import Validation from "../../core/validation";
+import { PropsBlock } from "../../core/types";
+
+interface DialogBodyProps extends PropsBlock {
+  onOk: () => void;
+}
 
 class DialogBody extends Block {
   constructor() {
@@ -31,14 +36,14 @@ class DialogBody extends Block {
 }
 
 export default class EditPasswordModal extends Block {
-  constructor(props: any) {
+  constructor(props: DialogBodyProps) {
     super("div", {
       ...props,
       Dialog: new Dialog({
         title: "Изменение пароля",
         labelOk: "Сохранить",
         onOk: () => {
-          const controller: any = this.children.Dialog.children.Body;
+          const controller: DialogBody = this.children.Dialog.children.Body;
           controller.props.errors = [
             Validation(
               controller,

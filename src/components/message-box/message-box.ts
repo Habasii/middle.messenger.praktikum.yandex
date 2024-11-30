@@ -1,11 +1,12 @@
 import { Input, ButtonIcon } from "../../components";
 import Block from "../../core/block";
 import Validation from "../../core/validation";
+import { PropsBlock } from "../../core/types";
 
 export default class MessageBox extends Block {
   profile: boolean;
 
-  constructor(props: any) {
+  constructor(props: PropsBlock) {
     super("div", {
       ...props,
       formState: {},

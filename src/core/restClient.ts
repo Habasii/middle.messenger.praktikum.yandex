@@ -5,8 +5,16 @@ const METHODS = {
   DELETE: "DELETE",
 };
 
+type HTTPTransportOption = {
+  method: string;
+  timeout: number;
+  headers: Record<string, string>;
+  data: string;
+  tries: number;
+};
+
 class HTTPTransport {
-  get = (url: string, options: any) => {
+  get = (url: string, options: HTTPTransportOption) => {
     return this.request(
       url,
       { ...options, method: METHODS.GET },
@@ -14,7 +22,7 @@ class HTTPTransport {
     );
   };
 
-  post = (url: string, options: any) => {
+  post = (url: string, options: HTTPTransportOption) => {
     return this.request(
       url,
       { ...options, method: METHODS.POST },
@@ -22,7 +30,7 @@ class HTTPTransport {
     );
   };
 
-  put = (url: string, options: any) => {
+  put = (url: string, options: HTTPTransportOption) => {
     return this.request(
       url,
       { ...options, method: METHODS.PUT },
@@ -30,7 +38,7 @@ class HTTPTransport {
     );
   };
 
-  delete = (url: string, options: any) => {
+  delete = (url: string, options: HTTPTransportOption) => {
     return this.request(
       url,
       { ...options, method: METHODS.DELETE },
@@ -38,7 +46,7 @@ class HTTPTransport {
     );
   };
 
-  request = (url: string, options: any, timeout = 5000) => {
+  request = (url: string, options: HTTPTransportOption, timeout = 5000) => {
     const { headers = {}, method, data } = options;
 
     return new Promise(function (resolve, reject) {
@@ -75,21 +83,24 @@ class HTTPTransport {
   };
 }
 
-function queryStringify(data: any) {
+function queryStringify(data: string) {
   if (typeof data !== "object") {
     throw new Error("Data must be object");
   }
 
   const keys = Object.keys(data);
   return keys.reduce((result, key, index) => {
-    return `${result}${key}=${data[key]}${index < keys.length - 1 ? "&" : ""}`;
+    return encodeURIComponent(`${result}${key}=${data[key]}${index < keys.length - 1 ? "&" : ""}`);
   }, "?");
 }
 
-function fetchWithRetry(url:string, options: any): any {
+function fetchWithRetry(
+  url: string,
+  options: HTTPTransportOption
+): Promise<Response> {
   const { tries = 1 } = options;
 
-  function onError(err:any): any {
+  function onError(err: Error): Promise<Response> {
     const triesLeft = tries - 1;
     if (!triesLeft) {
       throw err;
@@ -100,3 +111,5 @@ function fetchWithRetry(url:string, options: any): any {
 
   return fetch(url, options).catch(onError);
 }
+
+console.log(HTTPTransport, fetchWithRetry);

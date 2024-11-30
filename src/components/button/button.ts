@@ -1,6 +1,7 @@
 import Block from "../../core/block";
+import { PropsBlock } from "../../core/types";
 
-interface ButtonProps extends Block {
+interface ButtonProps extends PropsBlock {
   label: string;
   disabled: boolean;
   placeholder: string;
@@ -8,6 +9,9 @@ interface ButtonProps extends Block {
   page: string;
   color?: string;
   onClick: () => void;
+  attrs: {
+    [index: string]: string;
+  };
 }
 
 export default class Button extends Block {
