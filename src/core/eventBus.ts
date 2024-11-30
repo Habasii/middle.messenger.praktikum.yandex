@@ -1,22 +1,20 @@
-type Function = () => any;
-
 export default class EventBus<E extends string> {
-  private listeners: Record<string, Function[]>;
+  private listeners: Record<string, any[]>;
   constructor() {
     this.listeners = {};
   }
-  on(event: E, callback: () => void) {
+  on(event: E, callback: any) {
     if (!this.listeners[event]) {
       this.listeners[event] = [];
     }
     this.listeners[event].push(callback);
   }
-  off(event: E, callback: () => void) {
+  off(event: E, callback: any) {
     if (!this.listeners[event]) {
       throw new Error(`Нет события: ${event}`);
     }
     this.listeners[event] = this.listeners[event].filter(
-      (listener) => listener !== callback
+      (listener) => listener !== callback,
     );
   }
   emit<T extends any[] = []>(event: E, ...args: T) {

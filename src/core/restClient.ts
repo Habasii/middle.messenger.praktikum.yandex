@@ -6,7 +6,7 @@ const METHODS = {
 };
 
 class HTTPTransport {
-  get = (url: string, options = {}) => {
+  get = (url: string, options: any) => {
     return this.request(
       url,
       { ...options, method: METHODS.GET },
@@ -14,7 +14,7 @@ class HTTPTransport {
     );
   };
 
-  post = (url: string, options = {}) => {
+  post = (url: string, options: any) => {
     return this.request(
       url,
       { ...options, method: METHODS.POST },
@@ -22,7 +22,7 @@ class HTTPTransport {
     );
   };
 
-  put = (url: string, options = {}) => {
+  put = (url: string, options: any) => {
     return this.request(
       url,
       { ...options, method: METHODS.PUT },
@@ -30,7 +30,7 @@ class HTTPTransport {
     );
   };
 
-  delete = (url: string, options = {}) => {
+  delete = (url: string, options: any) => {
     return this.request(
       url,
       { ...options, method: METHODS.DELETE },
@@ -38,7 +38,7 @@ class HTTPTransport {
     );
   };
 
-  request = (url: string, options = {}, timeout = 5000) => {
+  request = (url: string, options: any, timeout = 5000) => {
     const { headers = {}, method, data } = options;
 
     return new Promise(function (resolve, reject) {
@@ -86,7 +86,7 @@ function queryStringify(data: any) {
   }, "?");
 }
 
-function fetchWithRetry(url:string, options = {}): any {
+function fetchWithRetry(url:string, options: any): any {
   const { tries = 1 } = options;
 
   function onError(err:any): any {
