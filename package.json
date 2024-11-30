@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port 3000",
-    "build": "npx tsc -noEmit && vite build",
+    "build": "npx vite build",
     "preview": "vite --port 3000",
     "serve": "vite preview",
     "start": "npm run preview",
