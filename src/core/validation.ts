@@ -11,20 +11,20 @@ function validationConditions(code: string, value: string) {
       break;
     case "first_name":
     case "second_name":
-      if (!/^[A-ZА-Я]+[\w-]*$/.test(value))
+      if (!/^[A-ZА-ЯЁ]+[\w-]*$/.test(value))
         error =
           "Первая буква должна быть заглавной, без спецсимволов (только дефис)";
       break;
     case "email":
       if (!/^\w+([.-_]?\w+)@\w+([.-]?\w+)(.\w)$/.test(value))
         error = "Не соответствует формату";
-      else if (/[А-Яа-я]/gi.test(value)) error = "Допустима только латиница";
+      else if (/[А-ЯЁа-яё]/gi.test(value)) error = "Допустима только латиница";
       break;
     case "password":
       if (!/^.{8,40}$/.test(value))
         error =
           "От 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра";
-      else if (!/[A-ZА-Я]/gi.test(value))
+      else if (!/[A-ZА-ЯЁ]/gi.test(value))
         error = "Обязательно хотя бы одна заглавная буква и цифра";
       else if (!/\d/gi.test(value))
         error = "Обязательно хотя бы одна заглавная буква и цифра";
