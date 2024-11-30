@@ -31,7 +31,7 @@ class DialogBody extends Block {
 }
 
 export default class EditPasswordModal extends Block {
-  constructor(props) {
+  constructor(props: any) {
     super("div", {
       ...props,
       Dialog: new Dialog({

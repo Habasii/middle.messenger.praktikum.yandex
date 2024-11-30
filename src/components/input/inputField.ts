@@ -34,6 +34,7 @@ export default class InputField extends Block {
   }
 
   componentDidUpdate(oldProps: InputFieldProps, newProps: InputFieldProps) {
+    if(typeof(oldProps) == 'string') console.log(oldProps);
     this.children._Input.setProps({ disabled: newProps.disabled });
 
     return true;
