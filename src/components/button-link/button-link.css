@@ -11,13 +11,13 @@
   text-align: center;
 }
 
-.button-link__primary {
+.button-link-primary {
   background-color: var(--main-color);
   color: var(--text-color);
   font-size: 13px;
 }
 
-.button-link__link {
+.button-link-link {
   color: var(--main-color);
   font-size: 11px;
   text-align: center;
@@ -30,8 +30,8 @@
   border-radius: 50%;
 }
 
-.button-link-arrow__left,
-.button-link-arrow__right {
+.button-link-arrow-left,
+.button-link-arrow-right {
   margin: 0 auto;
   width: 11px;
   height: 1.6px;
@@ -39,10 +39,10 @@
   background-color: var(--text-color);
 }
 
-.button-link-arrow__left::after,
-.button-link-arrow__left::before,
-.button-link-arrow__right::after,
-.button-link-arrow__right::before {
+.button-link-arrow-left::after,
+.button-link-arrow-left::before,
+.button-link-arrow-right::after,
+.button-link-arrow-right::before {
   content: "";
   background-color: #fff;
   display: inline-block;
@@ -51,23 +51,23 @@
   position: absolute;
 }
 
-.button-link-arrow__right::after {
+.button-link-arrow-right::after {
   transform: rotate(45deg);
   bottom: 2px;
 }
 
-.button-link-arrow__right::before {
+.button-link-arrow-right::before {
   transform: rotate(-45deg);
   top: 2px;
 }
 
-.button-link-arrow__left::after {
+.button-link-arrow-left::after {
   transform: rotate(-45deg);
   bottom: 2px;
   left: -1px;
 }
 
-.button-link-arrow__left::before {
+.button-link-arrow-left::before {
   transform: rotate(45deg);
   top: 2px;
   left: -1px;

@@ -1,2 +1,2 @@
-import './list-cat.css';
-export { default as ListCat } from './list-cat.hbs?raw';
+import "./list-cat.css";
+export { default as ListCat } from "./list-cat";

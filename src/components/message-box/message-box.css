@@ -25,7 +25,7 @@
 }
 
 .includes,
-.message-input .input__element {
+.message-input .input-element {
     height: 60%;
     color: var(--main-color);
 }
