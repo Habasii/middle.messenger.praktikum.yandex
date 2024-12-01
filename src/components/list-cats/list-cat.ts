@@ -1,14 +1,6 @@
 import Block from "../../core/block";
 import { CatCard } from "../cat-card";
-import { PropsBlock } from "../../core/types";
-
-interface cat {
-  name: string;
-  avatar: string;
-  date: string;
-  lest_message: string;
-  indicator: number;
-}
+import { PropsBlock, cat } from "../../core/types";
 
 interface ListCatProps extends PropsBlock {
   activeCatIndex: number;

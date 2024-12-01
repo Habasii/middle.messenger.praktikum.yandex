@@ -2,7 +2,7 @@ import Block from "./block";
 
 export interface PropsBlock {
   className?: string;
-  setProps: (nextProps: PropsBlock) => void;
+  setProps?: (nextProps: PropsBlock) => void;
   attrs?: {
     [index: string]: () => void;
   };
@@ -23,3 +23,13 @@ export interface PropsBlock {
 export interface BlockConstructable<P = PropsBlock> {
   new (props: P): Block;
 }
+
+export interface cat {
+  name: string;
+  avatar: string;
+  date: string;
+  lest_message: string;
+  indicator: number;
+}
+
+export type propType = string|boolean|Block|PropsBlock|cat|cat[]|(()=>void)|((nextProps: PropsBlock) => void)|string[]|Record<string, Block>|symbol

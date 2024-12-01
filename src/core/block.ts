@@ -1,7 +1,7 @@
 import EventBus from "./eventBus";
 import { nanoid } from "nanoid";
 import Handlebars from "handlebars";
-import { PropsBlock } from "./types";
+import { PropsBlock, propType } from "./types";
 
 export default abstract class Block {
   static EVENTS: {
@@ -19,15 +19,15 @@ export default abstract class Block {
   _element: HTMLElement;
   _meta: {
     tagName: string;
-    props: PropsBlock;
+    props: Record<string, propType>;
   };
   _id: string = nanoid(6);
   id: string;
   eventBus: () => EventBus<string>;
-  children: {
-    [index: string]: Block;
+  children: Record<string, Block|Block[]>;
+  props: {
+    [index: string]: propType;
   };
-  props: PropsBlock;
   className?: string = "";
   formState?: {
     [index: string]: string;
@@ -82,15 +82,14 @@ export default abstract class Block {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  _getChildrenAndProps(propsAndChildren: PropsBlock): {
-    children: { [index: string]: Block };
-    props: PropsBlock;
+  _getChildrenAndProps(propsAndChildren: { [index: string]: propType }): {
+    [index: string]: propType;
   } {
-    const children: { [index: string]: Block } = {};
-    const props = {};
+    const children: Record<string, Block|Block[]> = {};
+    const props: { [index: string]: propType } = {};
 
-    Object.keys(propsAndChildren).forEach((key: string) => {
-      const value = propsAndChildren[key];
+    Object.keys(propsAndChildren).forEach((key) => {
+      const value: propType = propsAndChildren[key];
       if (Array.isArray(value)) {
         value.forEach((obj) => {
           if (obj instanceof Block) {
@@ -167,8 +166,8 @@ export default abstract class Block {
     });
   }
 
-  _compile(): HTMLElement {
-    const propsAndStubs: Record<string, PropsBlock> = { ...this.props };
+  _compile(): DocumentFragment {
+    const propsAndStubs: { [index: string]: propType } = { ...this.props };
 
     Object.entries(this.children).forEach(([key, child]) => {
       if (Array.isArray(child)) {
@@ -180,7 +179,8 @@ export default abstract class Block {
       }
     });
 
-    const fragment: HTMLElement = this._createDocumentElement("template");
+    const fragment: HTMLTemplateElement = this._createDocumentElement("template") as HTMLTemplateElement;
+
     const template = Handlebars.compile(this.render());
     fragment.innerHTML = template(propsAndStubs);
 
@@ -222,23 +222,23 @@ export default abstract class Block {
     return "";
   }
 
-  getContent(): HTMLElement | undefined {
+  getContent() {
     return this.element;
   }
 
-  _makePropsProxy(props: {
-    [key: string]: PropsBlock;
-  }): ProxyHandler<{ [key: string]: PropsBlock }> {
+  _makePropsProxy(props: Record<string, propType>): Record<string, propType> {
     const eventBus = this.eventBus();
     const emitBind = eventBus.emit.bind(eventBus);
 
-    return new Proxy(props as PropsBlock, {
-      get(target, prop: string) {
-        const value = target[prop];
+    return new Proxy(props as Record<string, propType>, {
+      get(target: any, prop: string) {
+        // target может быть чем угдно
+        const value: propType = target[prop];
         return typeof value === "function" ? value.bind(target) : value;
       },
-      set(target, prop: string, value: PropsBlock) {
-        const oldTarget = { ...target };
+      set(target: any, prop: string, value: propType) {
+        // target может быть чем угдно
+        const oldTarget: Record<string, propType> = { ...target };
         target[prop] = value;
 
         emitBind(Block.EVENTS.FLOW_CDU, oldTarget, target);
